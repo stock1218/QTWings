@@ -5,6 +5,7 @@ except ImportError:
 
 
 class Keyboard:
+    """Object which abstracts keyboard interactions"""
     def __init__(self):
         self.right = False
         self.left = False
