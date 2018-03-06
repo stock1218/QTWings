@@ -18,15 +18,25 @@ class Game:
         self.frame.set_draw_handler(self.draw)
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
-
+        self.bullets = []
     def update(self):
         """Update the game state"""
         self.player.update(self.keyboard)
+        if self.keyboard.space:
+            b = self.player.fire()
+            if b:
+                self.bullets.append(b)
+
+        for bullet in self.bullets:
+            bullet.update()
+            if bullet.outOfBounds():
+                del bullet
 
     def draw(self, canvas):
         self.update()
         self.player.draw(canvas)
-
+        for bullet in self.bullets:
+            bullet.draw(canvas)
     def start(self):
         self.frame.start()
 

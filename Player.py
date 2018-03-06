@@ -1,5 +1,5 @@
 from Vector import Vector
-
+from Bullet import Bullet
 
 class Player:
     """Object providing a representation of the player"""
@@ -22,9 +22,9 @@ class Player:
         if kbd.up:
             self.velocity += self.directionVector()
         if kbd.left:
-            self.rotate(-1.5)
+            self.rotate(-2.5)
         if kbd.right:
-            self.rotate(1.5)
+            self.rotate(2.5)
         # Speed limiting
         if self.velocity.length() >= 5:
             self.velocity.normalize()
@@ -49,3 +49,7 @@ class Player:
         canvas.draw_line(self.position.getP(),
                          (self.position + self.directionVector() * 15).getP(),
                          4, "#0000ff")
+
+    def fire(self):
+        return Bullet(
+            (self.position + self.directionVector() * 16), self.directionVector() * 5)
