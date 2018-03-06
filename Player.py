@@ -1,5 +1,10 @@
 from Vector import Vector
 from Bullet import Bullet
+try:
+    import simplegui
+except ImportError:
+    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+
 
 class Player:
     """Object providing a representation of the player"""
@@ -9,6 +14,9 @@ class Player:
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
+        self.canFire = True
+        self.fireRate = 3 #rounds per second
+        self.fireTimer = simplegui.create_timer(1000 / self.fireRate, self.resetFire)
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
@@ -20,7 +28,7 @@ class Player:
         """Update the Player state (should be called by Game.update)"""
         # Turning and acceleration
         if kbd.up:
-            self.velocity += self.directionVector()
+            self.velocity += self.directionVector() * 0.75
         if kbd.left:
             self.rotate(-2.5)
         if kbd.right:
@@ -51,5 +59,13 @@ class Player:
                          4, "#0000ff")
 
     def fire(self):
-        return Bullet(
-            (self.position + self.directionVector() * 16), self.directionVector() * 5)
+        if self.canFire:
+            self.canFire = False
+            self.fireTimer.start()
+            return Bullet(
+                (self.position + self.directionVector() * 16), self.directionVector() * 8)
+        return None
+
+    def resetFire(self):
+        self.canFire = True
+        self.fireTimer.stop()
