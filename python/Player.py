@@ -66,7 +66,7 @@ class Player:
             self.canFire = False
             self.fireTimer.start()
             return Bullet(
-                (self.position + self.directionVector() * 16), self.directionVector() * 8)
+                self.width, self.height, (self.position + self.directionVector() * 16), self.directionVector() * 8)
         return None
 
     def resetFire(self):
