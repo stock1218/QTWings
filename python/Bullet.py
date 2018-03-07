@@ -1,5 +1,7 @@
 class Bullet:
-    def __init__(self, position, velocity):
+    def __init__(self, width, height, position, velocity):
+        self.width = width
+        self.height = height
         self.position = position
         self.velocity = velocity
         self.radius = 3
@@ -11,4 +13,4 @@ class Bullet:
         self.position += self.velocity
 
     def outOfBounds(self):
-        return (self.position.x < 0) or (self.position.x > 400) or (self.position.y < 0) or (self.position.y > 8000)
+        return (self.position.x < 0) or (self.position.x > self.width) or (self.position.y < 0) or (self.position.y > self.height)

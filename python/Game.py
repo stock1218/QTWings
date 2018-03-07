@@ -9,8 +9,8 @@ except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 from random import randrange
 
-WIDTH = 600
-HEIGHT = 600
+WIDTH = 1600
+HEIGHT = 1200
 
 class Game:
     """Object responsible for the high level organisation of the game"""
@@ -54,19 +54,12 @@ class Game:
             for enemy in self.enemies:
                 if (enemy.position - bullet.position).length() < bullet.radius + enemy.radius:
                     print("HIT")
-                    enemy.health -= 1
-                    if enemy.health == 0:
-                        self.enemies.remove(enemy)
-                        print("DESTROYED")
+                    self.enemies.remove(enemy)
                     self.bullets.remove(bullet)
                     break
 
         for enemy in self.enemies:
             enemy.update(self.player)
-            for i in self.enemies:
-                if (enemy.position != i.position) and (enemy.position - i.position).length() < enemy.radius * 2:
-                    pass  # What to do when they collide
-
 
     def draw(self, canvas):
         self.update()
