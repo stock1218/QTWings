@@ -7,12 +7,10 @@ class Enemy:
         self.position = initialPos
         self.velocity = velocity
         self.acceleration = acceleration
-        self.health = health
         self.rotation = 0
         self.velocityLimit = velocityLimit
+        self.health = health
         self.radius = radius
-
-
 
     def update(self, player):
         toPlayer = player.position - self.position
@@ -22,7 +20,6 @@ class Enemy:
         if self.velocity.length() >= self.velocityLimit:
             self.velocity.normalize()
             self.velocity *= self.velocityLimit
-
 
         self.position += self.velocity
 

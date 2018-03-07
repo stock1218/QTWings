@@ -34,7 +34,7 @@ class Game:
                 Vector(1, 1),
                 0.2,
                 2,
-                2,
+                1,
                 6
             ))
 
@@ -65,8 +65,7 @@ class Game:
             enemy.update(self.player)
             for i in self.enemies:
                 if (enemy.position != i.position) and (enemy.position - i.position).length() < enemy.radius * 2:
-                    pass
-                    #what to do when they collide
+                    pass  # What to do when they collide
 
 
     def draw(self, canvas):
