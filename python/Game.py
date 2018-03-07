@@ -9,8 +9,8 @@ except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 from random import randrange
 
-WIDTH = 1600
-HEIGHT = 1200
+WIDTH = 800
+HEIGHT = 600
 
 class Game:
     """Object responsible for the high level organisation of the game"""
@@ -24,7 +24,7 @@ class Game:
         self.frame.set_draw_handler(self.draw)
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
-        self.wave = 10
+        self.wave = 1002
         self.bullets = []
         self.enemies = []
 
