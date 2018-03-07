@@ -28,8 +28,9 @@ class Game:
                 0.2,
                 2,
                 1,
-                4
+                6
             ))
+
     def update(self):
         """Update the game state"""
         self.player.update(self.keyboard)
@@ -41,7 +42,14 @@ class Game:
         for bullet in self.bullets:
             bullet.update()
             if bullet.outOfBounds():
-                del bullet
+                self.bullets.remove(bullet)
+                continue
+            for enemy in self.enemies:
+                if (enemy.position - bullet.position).length() < bullet.radius + enemy.radius:
+                    print("HIT")
+                    self.enemies.remove(enemy)
+                    self.bullets.remove(bullet)
+                    break
 
         for enemy in self.enemies:
             enemy.update(self.player)
