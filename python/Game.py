@@ -27,7 +27,7 @@ class Game:
                 Vector(1, 1),
                 0.2,
                 2,
-                1,
+                2,
                 6
             ))
 
@@ -47,12 +47,20 @@ class Game:
             for enemy in self.enemies:
                 if (enemy.position - bullet.position).length() < bullet.radius + enemy.radius:
                     print("HIT")
-                    self.enemies.remove(enemy)
+                    enemy.health -= 1
+                    if enemy.health == 0:
+                        self.enemies.remove(enemy)
+                        print("DESTROYED")
                     self.bullets.remove(bullet)
                     break
 
         for enemy in self.enemies:
             enemy.update(self.player)
+            for i in self.enemies:
+                if (enemy.position != i.position) and (enemy.position - i.position).length() < enemy.radius * 2:
+                    pass
+                    #what to do when they collide
+
 
     def draw(self, canvas):
         self.update()
