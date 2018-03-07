@@ -3,6 +3,8 @@ from Keyboard import Keyboard
 from Vector import Vector
 from Enemy import Enemy
 from HUD import HUD
+from PickUp import PickUp
+
 try:
     import simplegui
 except ImportError:
@@ -24,7 +26,8 @@ class Game:
         self.frame.set_draw_handler(self.draw)
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
-        self.wave = 1002
+        self.pickUp = PickUp()
+        self.wave = 1
         self.bullets = []
         self.enemies = []
 
@@ -61,6 +64,8 @@ class Game:
         for enemy in self.enemies:
             enemy.update(self.player)
 
+        self.pickUp.update()
+
     def draw(self, canvas):
         self.update()
         self.player.draw(canvas)
@@ -71,6 +76,7 @@ class Game:
             enemy.draw(canvas)
 
         self.hud.draw(canvas, self.wave)
+        self.pickUp.draw(canvas)
 
     def start(self):
         self.frame.start()
