@@ -28,7 +28,7 @@ class Player:
         """Update the Player state (should be called by Game.update)"""
         # Turning and acceleration
         if kbd.up:
-            self.velocity += self.directionVector() * 0.75
+            self.velocity += self.directionVector() * 0.3
         if kbd.left:
             self.rotate(-2.5)
         if kbd.right:

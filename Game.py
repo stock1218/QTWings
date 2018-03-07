@@ -1,11 +1,12 @@
 from Player import Player
 from Keyboard import Keyboard
 from Vector import Vector
+from Enemy import Enemy
 try:
     import simplegui
 except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
-
+from random import randrange
 
 class Game:
     """Object responsible for the high level organisation of the game"""
@@ -19,6 +20,16 @@ class Game:
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
         self.bullets = []
+        self.enemies = []
+        for i in range(5):
+            self.enemies.append(Enemy(
+                Vector(randrange(0, 400), randrange(0, 800)),
+                Vector(1, 1),
+                0.2,
+                2,
+                1,
+                4
+            ))
     def update(self):
         """Update the game state"""
         self.player.update(self.keyboard)
@@ -32,11 +43,18 @@ class Game:
             if bullet.outOfBounds():
                 del bullet
 
+        for enemy in self.enemies:
+            enemy.update(self.player)
+
     def draw(self, canvas):
         self.update()
         self.player.draw(canvas)
         for bullet in self.bullets:
             bullet.draw(canvas)
+
+        for enemy in self.enemies:
+            enemy.draw(canvas)
+
     def start(self):
         self.frame.start()
 
