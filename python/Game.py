@@ -2,25 +2,32 @@ from Player import Player
 from Keyboard import Keyboard
 from Vector import Vector
 from Enemy import Enemy
+from HUD import HUD
 try:
     import simplegui
 except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 from random import randrange
 
+WIDTH = 600
+HEIGHT = 600
+
 class Game:
     """Object responsible for the high level organisation of the game"""
 
     def __init__(self):
         """Constructor - Initialise game state and prepare the canvas"""
-        self.player = Player(Vector(200, 400))
+        self.player = Player(WIDTH, HEIGHT, Vector(200, 400))
         self.keyboard = Keyboard()
-        self.frame = simplegui.create_frame("QTWings", 400, 800)
+        self.hud = HUD(self.player, WIDTH, HEIGHT)
+        self.frame = simplegui.create_frame("QTWings", WIDTH, HEIGHT)
         self.frame.set_draw_handler(self.draw)
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
+        self.wave = 10
         self.bullets = []
         self.enemies = []
+
         for i in range(5):
             self.enemies.append(Enemy(
                 Vector(randrange(0, 400), randrange(0, 800)),
@@ -70,6 +77,8 @@ class Game:
 
         for enemy in self.enemies:
             enemy.draw(canvas)
+
+        self.hud.draw(canvas, self.wave)
 
     def start(self):
         self.frame.start()

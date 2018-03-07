@@ -9,8 +9,11 @@ except ImportError:
 class Player:
     """Object providing a representation of the player"""
 
-    def __init__(self, initialPos):
+    def __init__(self, width, height,initialPos):
         """Initialise a new Player object"""
+        self.width = width
+        self.height = height
+        self.health = 5
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
@@ -39,14 +42,14 @@ class Player:
             self.velocity *= 5
 
         # Screen wrapping
-        if self.position.x > 400:
+        if self.position.x > self.width:
             self.position.x = 0
         if self.position.x < 0:
-            self.position.x = 400
-        if self.position.y > 800:
+            self.position.x = self.width
+        if self.position.y > self.height:
             self.position.y = 0
         if self.position.y < 0:
-            self.position.y = 800
+            self.position.y = self.height
 
         self.position += self.velocity
 
@@ -69,3 +72,6 @@ class Player:
     def resetFire(self):
         self.canFire = True
         self.fireTimer.stop()
+
+    def getHealth(self):
+        return self.health
