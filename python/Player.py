@@ -35,6 +35,8 @@ class Player:
             self.rotate(-2.5)
         if kbd.right:
             self.rotate(2.5)
+        if kbd.down:
+            self.velocity -= self.directionVector() * 0.3
         # Speed limiting
         if self.velocity.length() >= 5:
             self.velocity.normalize()
