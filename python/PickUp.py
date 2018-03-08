@@ -17,13 +17,15 @@ class PickUp:
             self.pickUps.pop(0)
 
 #        if(type == 'PowerUp'):
-            self.pickUps.append(PowerUp())
+            self.pickUps.append(PowerUp(self.width, self.height))
 #        elif (type == 'Weapon'):
 #            self.pickUps.append(Weapon())
 
 
-    def __init__(self, min=9000, max=200000):
+    def __init__(self, width, height, min=9000, max=200000):
         """Construct the PickUp"""
+        self.width = width
+        self.height = height
         self.pickUps = []
         self.maxPickUps = 5
         self.timer = simplegui.create_timer(randrange(min, max), self.tick)
