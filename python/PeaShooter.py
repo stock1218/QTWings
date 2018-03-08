@@ -4,7 +4,7 @@ from Bullet import Bullet
 class PeaShooter:
     def __init__(self):
         self.canFire = True
-        self.fireRate = 3  # Rounds per second
+        self.fireRate = 60  # Rounds per second
         self.fireTimer = simplegui.create_timer(1000 / self.fireRate, self.resetFire)
 
 

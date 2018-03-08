@@ -4,6 +4,7 @@ from Vector import Vector
 from Enemy import Enemy
 from HUD import HUD
 from PickUp import PickUp
+from Interaction import Interaction
 
 try:
     import simplegui
@@ -26,7 +27,7 @@ class Game:
         self.frame.set_draw_handler(self.draw)
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
-        self.pickUp = PickUp()
+        self.pickUp = PickUp(WIDTH, HEIGHT, 100, 1000)
         self.wave = 1
         self.bullets = []
         self.enemies = []
@@ -40,6 +41,8 @@ class Game:
                 1,
                 6
             ))
+
+        self.interaction = Interaction(self.enemies, self.player)
 
     def update(self):
         """Update the game state"""
