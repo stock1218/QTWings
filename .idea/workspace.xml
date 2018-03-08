@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78ed5939-86e3-4909-ad4d-941c8beb3eb5" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/python/Bomb.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/python/EMP.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/python/NailBomb.py" />
-      <change beforePath="$PROJECT_DIR$/python/Weapon.py" afterPath="$PROJECT_DIR$/python/Weapon.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/python/__init__.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,18 +29,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WeaponPickup.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/python/WeaponPickup.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="24" />
-              <folding>
-                <element signature="e#28#56#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Weapon.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python/Weapon.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -51,6 +37,16 @@
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/python/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,16 +75,6 @@
       </file>
       <file leaf-file-name="Bullet.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python/Bullet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -134,13 +120,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/python/__init__.py" />
         <option value="$PROJECT_DIR$/python/WeaponPickup.py" />
         <option value="$PROJECT_DIR$/python/Player.py" />
         <option value="$PROJECT_DIR$/python/Weapon.py" />
         <option value="$PROJECT_DIR$/python/Bomb.py" />
         <option value="$PROJECT_DIR$/python/EMP.py" />
         <option value="$PROJECT_DIR$/python/NailBomb.py" />
+        <option value="$PROJECT_DIR$/python/__init__.py" />
       </list>
     </option>
   </component>
@@ -310,14 +296,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python/Game.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-147">
@@ -372,16 +350,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/Weapon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python/NailBomb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -394,9 +362,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/Weapon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
-            <element signature="e#28#56#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
