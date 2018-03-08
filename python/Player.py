@@ -18,9 +18,6 @@ class Player:
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
-        self.canFire = True
-        self.fireRate = 3  # Rounds per second
-        self.fireTimer = simplegui.create_timer(1000 / self.fireRate, self.resetFire)
         self.weapon = PeaShooter()
 
     def directionVector(self):
@@ -64,16 +61,7 @@ class Player:
                          4, "#0000ff")
 
     def fire(self):
-        if self.canFire:
-            self.canFire = False
-            self.fireTimer.start()
-            return Bullet(
-                self.width, self.height, (self.position + self.directionVector() * 16), self.directionVector() * 8)
-        return None
-
-    def resetFire(self):
-        self.canFire = True
-        self.fireTimer.stop()
+        return self.weapon.fire(self.width, self.height, self.position, self.directionVector)
 
     def getHealth(self):
         return self.health
