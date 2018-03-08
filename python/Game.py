@@ -4,7 +4,7 @@ from Vector import Vector
 from Enemy import Enemy
 from HUD import HUD
 from PickUp import PickUp
-
+from Enemies import Enemies
 try:
     import simplegui
 except ImportError:
@@ -29,10 +29,10 @@ class Game:
         self.pickUp = PickUp()
         self.wave = 1
         self.bullets = []
-        self.enemies = []
+        self.enemies = Enemies(self.player)
 
         for i in range(5):
-            self.enemies.append(Enemy(
+            self.enemies.enemies.append(Enemy(
                 Vector(randrange(0, 400), randrange(0, 800)),
                 Vector(1, 1),
                 0.2,
@@ -54,16 +54,11 @@ class Game:
             if bullet.outOfBounds():
                 self.bullets.remove(bullet)
                 continue
-            for enemy in self.enemies:
+            for enemy in self.enemies.enemies:
                 if (enemy.position - bullet.position).length() < bullet.radius + enemy.radius:
-                    print("HIT")
-                    self.enemies.remove(enemy)
+                    self.enemies.removeEnemy(enemy)
                     self.bullets.remove(bullet)
                     break
-
-        for enemy in self.enemies:
-            enemy.update(self.player)
-
         self.pickUp.update()
 
     def draw(self, canvas):
@@ -72,8 +67,7 @@ class Game:
         for bullet in self.bullets:
             bullet.draw(canvas)
 
-        for enemy in self.enemies:
-            enemy.draw(canvas)
+        self.enemies.draw(canvas)
 
         self.hud.draw(canvas, self.wave)
         self.pickUp.draw(canvas)

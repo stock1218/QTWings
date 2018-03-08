@@ -13,9 +13,6 @@ class Enemy:
         self.radius = radius
 
     def update(self, player):
-        toPlayer = player.position - self.position
-
-        self.velocity += toPlayer.normalize() * self.acceleration
 
         if self.velocity.length() >= self.velocityLimit:
             self.velocity.normalize()
@@ -25,3 +22,11 @@ class Enemy:
 
     def draw(self, canvas):
         canvas.draw_circle(self.position.getP(), self.radius, 1, "#ff0000", "#ff0000")
+
+    def hit(self, other):
+        d = (self.position - other.position).length()
+        return d <= self.radius * 6 + other.radius
+
+    def seekObject(self, obj):
+        toObj = obj.position - self.position
+        self.velocity += toObj.normalize() * self.acceleration
