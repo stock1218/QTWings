@@ -21,7 +21,6 @@ class PickUp:
         elif (type == 'Weapon'):
             self.pickUps.append(Weapon(self.width, self.height))
 
-
     def __init__(self, width, height, min=9000, max=200000):
         """Construct the PickUp"""
         self.width = width
@@ -36,9 +35,12 @@ class PickUp:
         self.max = max
 
 
-    def pickedUp(self, pickUp):
+    def getPickUps(self):
+        return self.pickUps
+
+    def givePickUp(self, pickUp):
         """Find pickup and remove it from the list"""
-        self.pickUps.pop(pickUp.index)
+        return self.pickUps.pop(pickUp.index)
  
     def update(self):
         """would be used to update sprites"""

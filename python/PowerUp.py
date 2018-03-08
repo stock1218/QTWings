@@ -13,7 +13,7 @@ class PowerUp:
         """Construct PowerUp"""
         self.type = random.choice(['God Mode', 'Shield'])
         self.pos = Vector(random.randrange(10, width-10), random.randrange(10, height-10))
-    
+        self.radius = 9 
 
     def draw(self, canvas):
-         canvas.draw_circle((self.pos.x, self.pos.y), 9, 1, 'Red', 'Red') 
+         canvas.draw_circle((self.pos.x, self.pos.y), self.radius, 1, 'Red', 'Red') 

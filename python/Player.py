@@ -14,11 +14,13 @@ class Player:
         """Initialise a new Player object"""
         self.width = width
         self.height = height
+        self.radius = 9
         self.health = 5
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
         self.weapon = PeaShooter()
+        self.powerUp = None
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
@@ -55,10 +57,14 @@ class Player:
         self.velocity *= 0.98
 
     def draw(self, canvas):
-        canvas.draw_circle(self.position.getP(), 9, 1, "#0000ff", "#0000ff")
+        canvas.draw_circle(self.position.getP(), self.radius, 1, "#0000ff", "#0000ff")
         canvas.draw_line(self.position.getP(),
                          (self.position + self.directionVector() * 15).getP(),
                          4, "#0000ff")
+
+    def givePickUp(self, pickUp):
+        self.powerUp = pickUp
+        print("PICKED UP: " + pickUp) 
 
     def fire(self):
         return self.weapon.fire(self.width, self.height, self.position, self.directionVector)

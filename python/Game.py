@@ -4,6 +4,7 @@ from Vector import Vector
 from Enemy import Enemy
 from HUD import HUD
 from PickUp import PickUp
+from Interaction import Interaction
 
 try:
     import simplegui
@@ -40,6 +41,8 @@ class Game:
                 1,
                 6
             ))
+
+        self.interaction = Interaction(self.enemies, self.player)
 
     def update(self):
         """Update the game state"""
