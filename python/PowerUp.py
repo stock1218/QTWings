@@ -16,4 +16,10 @@ class PowerUp:
         self.radius = 9 
 
     def draw(self, canvas):
-         canvas.draw_circle((self.pos.x, self.pos.y), self.radius, 1, 'Red', 'Red') 
+        canvas.draw_circle((self.pos.x, self.pos.y), self.radius, 1, 'Red', 'Red') 
+
+    def getPos(self):
+        return self.pos
+
+    def getRadius(self):
+        return self.radius

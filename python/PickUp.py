@@ -30,6 +30,8 @@ class PickUp:
         self.timer = simplegui.create_timer(random.randrange(min, max), self.tick)
         self.timer.start()
 
+        self.tick()
+
     def setInterval(self, min, max):
         self.min = min
         self.max = max
@@ -40,7 +42,7 @@ class PickUp:
 
     def givePickUp(self, pickUp):
         """Find pickup and remove it from the list"""
-        return self.pickUps.pop(pickUp.index)
+        return self.pickUps.pop(self.pickUps.index(pickUp))
  
     def update(self):
         """would be used to update sprites"""
