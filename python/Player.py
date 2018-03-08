@@ -20,6 +20,7 @@ class Player:
         self.canFire = True
         self.fireRate = 3  # Rounds per second
         self.fireTimer = simplegui.create_timer(1000 / self.fireRate, self.resetFire)
+        self.weapon = Bullet()
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
