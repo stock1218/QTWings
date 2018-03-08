@@ -3,7 +3,7 @@ try:
 except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-from Weapon import Weapon
+#from Weapon import Weapon
 from PowerUp import PowerUp
 from random import randrange
 
@@ -16,10 +16,10 @@ class PickUp:
         if(self.pickUps.length > self.maxPickUps):
             self.pickUps.pop(0)
 
-        if(type == 'PowerUp'):
+#        if(type == 'PowerUp'):
             self.pickUps.append(PowerUp())
-        elif (type == 'Weapon'):
-            self.pickUps.append(Weapon())
+#        elif (type == 'Weapon'):
+#            self.pickUps.append(Weapon())
 
 
     def __init__(self, min=9000, max=200000):
