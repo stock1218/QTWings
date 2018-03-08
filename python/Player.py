@@ -1,5 +1,6 @@
 from Vector import Vector
 from Bullet import Bullet
+from PeaShooter import PeaShooter
 try:
     import simplegui
 except ImportError:
@@ -20,7 +21,7 @@ class Player:
         self.canFire = True
         self.fireRate = 3  # Rounds per second
         self.fireTimer = simplegui.create_timer(1000 / self.fireRate, self.resetFire)
-        self.weapon = Bullet()
+        self.weapon = PeaShooter()
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
