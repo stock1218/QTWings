@@ -19,7 +19,7 @@ class PickUp:
         if(type == 'PowerUp'):
             self.pickUps.append(PowerUp())
         elif (type == 'Weapon'):
-            self.pickUps.append(Weapon())
+            self.pickUps.append(Weapon().getWeapon())
 
 
     def __init__(self, min=9000, max=200000):
