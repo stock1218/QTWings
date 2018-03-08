@@ -12,7 +12,7 @@ class PowerUp:
     def __init__(self, width, height):
         """Construct PowerUp"""
         self.type = random.choice(['God Mode', 'Shield'])
-        self.pos = Vector(random.randrange(10, width-10), random.randrange(10, width-10))
+        self.pos = Vector(random.randrange(10, width-10), random.randrange(10, height-10))
     
 
     def draw(self, canvas):

@@ -3,9 +3,9 @@ try:
 except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-#from Weapon import Weapon
+from Weapon import Weapon
 from PowerUp import PowerUp
-from random import randrange
+import random
 
 class PickUp:
 
@@ -13,13 +13,13 @@ class PickUp:
         """Add a random type of pickup (PowerUp, Weapon(Gun, Bomb)) to pickups[] and reset the timer to a different interval"""
         type = random.choice(['PowerUp', 'Weapon'])	
 	
-        if(self.pickUps.length > self.maxPickUps):
+        if(len(self.pickUps) > self.maxPickUps):
             self.pickUps.pop(0)
 
-#        if(type == 'PowerUp'):
+        if(type == 'PowerUp'):
             self.pickUps.append(PowerUp(self.width, self.height))
-#        elif (type == 'Weapon'):
-#            self.pickUps.append(Weapon())
+        elif (type == 'Weapon'):
+            self.pickUps.append(Weapon(self.width, self.height))
 
 
     def __init__(self, width, height, min=9000, max=200000):
@@ -28,7 +28,7 @@ class PickUp:
         self.height = height
         self.pickUps = []
         self.maxPickUps = 5
-        self.timer = simplegui.create_timer(randrange(min, max), self.tick)
+        self.timer = simplegui.create_timer(random.randrange(min, max), self.tick)
         self.timer.start()
 
     def setInterval(self, min, max):

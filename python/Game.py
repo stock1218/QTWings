@@ -26,7 +26,7 @@ class Game:
         self.frame.set_draw_handler(self.draw)
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
-        self.pickUp = PickUp(WIDTH, HEIGHT)
+        self.pickUp = PickUp(WIDTH, HEIGHT, 100, 1000)
         self.wave = 1
         self.bullets = []
         self.enemies = []
