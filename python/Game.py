@@ -66,9 +66,11 @@ class Game:
 
         for enemy in self.enemies:
             enemy.update(self.player)
-
-
-        self.pickUp.update()
+            for i in self.enemies:
+                if (enemy.position != i.position) and (enemy.position - i.position).length() + 1 < enemy.radius * 2:
+                    enemy.position += enemy.position.copy().subtract(i.position).normalize()
+                    i.position += i.position.copy().subtract(enemy.position).normalize()
+        self.pickUp.update()    
 
     def draw(self, canvas):
         self.update()
