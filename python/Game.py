@@ -60,14 +60,20 @@ class Game:
             for enemy in self.enemies:
                 if (enemy.position - bullet.position).length() < bullet.radius + enemy.radius:
                     print("HIT")
-                    self.enemies.remove(enemy)
+                    enemy.health -= 1
+                    if enemy.health == 0:
+                        self.enemies.remove(enemy)
+                        print("DESTROYED")
                     self.bullets.remove(bullet)
                     break
 
         for enemy in self.enemies:
             enemy.update(self.player)
-
-        self.pickUp.update()
+            for i in self.enemies:
+                if (enemy.position != i.position) and (enemy.position - i.position).length() + 1 < enemy.radius * 2:
+                    enemy.position += enemy.position.copy().subtract(i.position).normalize()
+                    i.position += i.position.copy().subtract(enemy.position).normalize()
+        self.pickUp.update()    
 
     def draw(self, canvas):
         self.update()
