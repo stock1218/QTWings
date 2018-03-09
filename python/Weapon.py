@@ -13,7 +13,7 @@ class Weapon:
         self.radius = 9
 
     def draw(self, canvas):
-       canvas.draw_circle((self.pos.x, self.pos.y), 9, 1, 'Green', 'Green')
+        canvas.draw_circle((self.pos.x, self.pos.y), 9, 1, 'Green', 'Green')
 
     def getWeapon(self):
         return self.type
