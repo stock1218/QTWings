@@ -2,9 +2,9 @@ import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 from Bullet import Bullet
 
 class PeaShooter:
-    def __init__(self):
+    def __init__(self, fireRate):
         self.canFire = True
-        self.fireRate = 60  # Rounds per second
+        self.fireRate = fireRate  # Rounds per second
         self.fireTimer = simplegui.create_timer(1000 / self.fireRate, self.resetFire)
 
 

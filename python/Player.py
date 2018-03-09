@@ -19,7 +19,7 @@ class Player:
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
-        self.weapon = PeaShooter()
+        self.weapon = PeaShooter(60)
         self.powerUp = None
 
     def directionVector(self):
