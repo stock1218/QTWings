@@ -50,7 +50,7 @@ class Game:
         if self.keyboard.space:
             b = self.player.fire()
             if b:
-                self.bullets.append(b)
+                self.bullets += b
 
         for bullet in self.bullets:
             bullet.update()
