@@ -69,10 +69,14 @@ class Player:
         if(self.powerUp):
             self.powerUp.draw(canvas, self.position)
 
-    def givePickUp(self, pickUp):
-        self.powerUp = pickUp
-        self.timer.start()
-        print("PICKED UP: " + str(pickUp)) 
+    def givePickUp(self, type, pickUp):
+        if(type == 'PowerUp'):
+            self.powerUp = pickUp
+            self.timer.start()
+        else:
+            self.weapon = pickUp
+
+        print("PICKED UP: " + type) 
 
     def countDown(self):
         self.powerUp.tick()

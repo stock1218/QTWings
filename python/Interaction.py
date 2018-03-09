@@ -20,7 +20,7 @@ class Interaction:
         '''check for collisions'''
         for i in self.pickUp.getPickUps():
             if(self.distanceTo(i.getPos(), self.player.getPos()) <= self.player.getRadius() + i.getRadius()):
-                self.player.givePickUp(self.pickUp.givePickUp(i))
+                self.player.givePickUp(self.pickUp.getType(i), self.pickUp.givePickUp(i))
                 print("PICKUP")
 
         '''enemy collisions with each other and player'''

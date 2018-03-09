@@ -32,5 +32,5 @@ class PowerUp:
     def getType(self):
         return 'PowerUp'
 
-    def getPower(self):
+    def getValue(self):
         return self.power
