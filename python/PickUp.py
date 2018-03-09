@@ -36,13 +36,13 @@ class PickUp:
         self.min = min
         self.max = max
 
-
     def getPickUps(self):
         return self.pickUps
 
     def givePickUp(self, pickUp):
         """Find pickup and remove it from the list"""
-        return self.pickUps.pop(self.pickUps.index(pickUp))
+        getPickUp = self.pickUps.pop(self.pickUps.index(pickUp))
+        return getPickUp.getPower()
  
     def update(self):
         """would be used to update sprites"""
@@ -52,4 +52,3 @@ class PickUp:
     def draw(self, canvas):
         for i in self.pickUps:
             i.draw(canvas)
-

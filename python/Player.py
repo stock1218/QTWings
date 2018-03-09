@@ -21,6 +21,7 @@ class Player:
         self.rotation = 0  # Degrees rotation from initial
         self.weapon = PeaShooter()
         self.powerUp = None
+        self.timer = simplegui.create_timer(1000, self.countDown)
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
@@ -64,9 +65,19 @@ class Player:
                          (self.position + self.directionVector() * 15).getP(),
                          4, "#0000ff")
 
+        if(self.powerUp):
+            self.powerUp.draw(canvas, self.position)
+
     def givePickUp(self, pickUp):
         self.powerUp = pickUp
+        self.timer.start()
         print("PICKED UP: " + str(pickUp)) 
+
+    def countDown(self):
+        self.powerUp.tick()
+        if(self.powerUp.status()):
+            self.powerUp = None
+            self.timer.stop()
 
     def fire(self):
         return self.weapon.fire(self.width, self.height, self.position, self.directionVector)

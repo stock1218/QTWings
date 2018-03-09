@@ -13,13 +13,13 @@ class Weapon:
         self.radius = 9
 
     def draw(self, canvas):
-       canvas.draw_circle((self.pos.x, self.pos.y), 9, 1, 'Green', 'Green') 
+       canvas.draw_circle(self.pos.getP(), 9, 1, 'Green', 'Green') 
 
     def getWeapon(self):
         return self.type
 
     def draw(self, canvas):
-         canvas.draw_circle((self.pos.x, self.pos.y), 9, 1, 'Blue', 'Blue')
+         canvas.draw_circle(self.pos.getP(), 9, 1, 'Blue', 'Blue')
 
     def isPickedUp(self):
         return self.pickedUp
@@ -32,3 +32,9 @@ class Weapon:
 
     def pickUp(self):
         self.pickedUp = True
+
+    def getType(self):
+        return 'Weapon'
+
+    def getPower(self):
+        return None
