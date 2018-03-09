@@ -21,6 +21,9 @@ class Shield:
        self.duration -= 1
        if(self.duration <= 0):
            self.isDone = True
+
+    def getRadius(self):
+        return self.radius
  
     def status(self):
         return self.isDone

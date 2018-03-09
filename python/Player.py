@@ -16,12 +16,14 @@ class Player:
         self.width = width
         self.height = height
         self.radius = 9
+        self.collisionRadius = self.radius
         self.health = 3
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
         self.weapon = Shotgun()
         self.powerUp = None
+        self.noDamage = False
         self.timer = simplegui.create_timer(1000, self.countDown)
 
     def directionVector(self):
@@ -72,6 +74,8 @@ class Player:
     def givePickUp(self, type, pickUp):
         if(type == 'PowerUp'):
             self.powerUp = pickUp
+            self.collisionRadius = pickUp.getRadius()
+            self.noDamage = True
             self.timer.start()
         else:
             self.weapon = pickUp
@@ -93,8 +97,14 @@ class Player:
     def getRadius(self):
         return self.radius
 
+    def getCollisionRadius(self):
+        return self.collisionRadius
+
     def getHealth(self):
         return self.health
 
     def damage(self, amount):
-        self.health -= amount
+        if(self.noDamage):
+            pass
+        else:
+            self.health -= amount

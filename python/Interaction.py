@@ -30,7 +30,7 @@ class Interaction:
                     x.position += x.position.copy().subtract(y.position).normalize()
                     y.position += y.position.copy().subtract(x.position).normalize()
 
-            if (self.player.position - x.position).length() <= self.player.getRadius() + 1 + x.radius:
+            if (self.player.position - x.position).length() <= self.player.getCollisionRadius() + 1 + x.radius:
                 self.enemies.remove(x)
                 self.player.damage(x.damageDealt)
                 print("PLAYER DAMAGED")
