@@ -15,7 +15,7 @@ class Player:
         self.width = width
         self.height = height
         self.radius = 9
-        self.health = 5
+        self.health = 3
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
@@ -79,3 +79,6 @@ class Player:
 
     def getHealth(self):
         return self.health
+
+    def damage(self, amount):
+        self.health -= amount

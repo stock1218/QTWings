@@ -1,7 +1,7 @@
 from Player import Player
 from Keyboard import Keyboard
 from Vector import Vector
-from Enemy import Enemy
+from Gnat import Gnat
 from HUD import HUD
 from PickUp import PickUp
 from Interaction import Interaction
@@ -33,7 +33,7 @@ class Game:
         self.enemies = []
 
         for i in range(5):
-            self.enemies.append(Enemy(
+            self.enemies.append(Gnat(
                 Vector(randrange(0, 400), randrange(0, 800)),
                 Vector(1, 1),
                 0.2,
@@ -42,7 +42,7 @@ class Game:
                 6
             ))
 
-        self.interaction = Interaction(self.player, self.pickUp)
+        self.interaction = Interaction(self.player, self.pickUp, self.enemies)
 
     def update(self):
         """Update the game state"""
@@ -69,10 +69,7 @@ class Game:
 
         for enemy in self.enemies:
             enemy.update(self.player)
-            for i in self.enemies:
-                if (enemy.position != i.position) and (enemy.position - i.position).length() + 1 < enemy.radius * 2:
-                    enemy.position += enemy.position.copy().subtract(i.position).normalize()
-                    i.position += i.position.copy().subtract(enemy.position).normalize()
+
         self.pickUp.update()
         self.interaction.update();
 

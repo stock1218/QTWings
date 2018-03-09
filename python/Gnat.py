@@ -1,6 +1,6 @@
 import math
 from Vector import Vector
-class Enemy:
+class Gnat:
     """A basic representation of an enemy which directly pursues the player"""
 
     def __init__(self, initialPos, velocity, acceleration, velocityLimit, health, radius):
@@ -11,6 +11,7 @@ class Enemy:
         self.velocityLimit = velocityLimit
         self.health = health
         self.radius = radius
+        self.damageDealt = 1
 
     def update(self, player):
         toPlayer = player.position - self.position
