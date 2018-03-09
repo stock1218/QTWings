@@ -21,16 +21,10 @@ class PickUp:
 
     def tick(self):
         """Add a random type of pickup (PowerUp, Weapon(Gun, Bomb)) to pickups[] and reset the timer to a different interval"""
-        type = random.choice(['PowerUp', 'Weapon'])	
-
         if(len(self.pickUps) > self.maxPickUps):
             self.pickUps.pop(0)
 
-        if(type == 'PowerUp'):
-            self.pickUps.append(PowerUp(self.width, self.height))
-        elif (type == 'Weapon'):
-            self.pickUps.append(Weapon(self.width, self.height))
-
+        self.pickUps.append(random.choice([PowerUp(self.width, self.height), Weapon(self.width, self.height)]))
 
     def setInterval(self, min, max):
         self.min = min
