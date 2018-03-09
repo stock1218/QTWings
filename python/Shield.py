@@ -14,7 +14,7 @@ class Shield:
         self.isDone = False
 
     def draw(self, canvas, pos):
-        canvas.draw_circle(pos.getP(), self.radius, 1, 'White')
+        canvas.draw_circle(pos.getP(), self.radius, 1, 'rgba(0, 255, 0, 0.3)', 'rgba(0, 255, 0, 0.3)')
    
     def tick(self):
        print("Time Left: " + str(self.duration))
