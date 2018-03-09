@@ -1,6 +1,7 @@
 from Vector import Vector
 from Bullet import Bullet
 from PeaShooter import PeaShooter
+from Shotgun import Shotgun
 try:
     import simplegui
 except ImportError:
@@ -19,7 +20,7 @@ class Player:
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
-        self.weapon = PeaShooter()
+        self.weapon = Shotgun()
         self.powerUp = None
 
     def directionVector(self):
@@ -66,7 +67,7 @@ class Player:
 
     def givePickUp(self, pickUp):
         self.powerUp = pickUp
-        print("PICKED UP: " + str(pickUp)) 
+        print("PICKED UP: " + str(pickUp))
 
     def fire(self):
         return self.weapon.fire(self.width, self.height, self.position, self.directionVector)
