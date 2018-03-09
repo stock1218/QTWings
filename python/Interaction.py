@@ -3,6 +3,8 @@ try:
 except:
         import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
+from PickUp import PickUp
+
 class Interaction:
     '''Responsible for collisions between objects on the screen'''
 
@@ -12,9 +14,10 @@ class Interaction:
   
     def distanceTo(self, pos1, pos2):
        return (pos1 - pos2).length()
- 
-    def update():
+
+    def update(self):
         '''check for collisions'''
-        for i in PickUp.getPickUps():
-            if(distanceTo(i.pos, self.player.pos) <= self.player.radius + i.radius):
+        for i in self.pickUp.getPickUps():
+            if(self.distanceTo(i.getPos(), self.player.getPos()) <= self.player.getRadius() + i.getRadius()):
                 self.player.givePickUp(self.pickUp.givePickUp(i))
+                print("PICKUP")

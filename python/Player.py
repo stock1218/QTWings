@@ -66,10 +66,16 @@ class Player:
 
     def givePickUp(self, pickUp):
         self.powerUp = pickUp
-        print("PICKED UP: " + pickUp) 
+        print("PICKED UP: " + str(pickUp)) 
 
     def fire(self):
         return self.weapon.fire(self.width, self.height, self.position, self.directionVector)
+
+    def getPos(self):
+        return self.position
+
+    def getRadius(self):
+        return self.radius
 
     def getHealth(self):
         return self.health
