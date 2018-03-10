@@ -12,7 +12,7 @@ class Interaction:
         self.player = player
         self.pickUp = pickUp
         self.enemies = enemies
-  
+
     def distanceTo(self, pos1, pos2):
        return (pos1 - pos2).length()
 
@@ -39,6 +39,7 @@ class Interaction:
         for explosion in explosions:
             if (not explosion.hasExploded()):
                 for enemy in self.enemies:
-                    if(self.distanceTo(enemy.getPos(), explosion.getPos()) <= enemy.getRadius() + explosion.getRadius()):
-                        enemy.damage(explosion.getDamage())
+                    if explosion.isColliding(enemy):
+                        if type(explosion) is ExplosiveBomb:
+                            enemy.damage(explosion.getDamage())
                 explosion.finish()

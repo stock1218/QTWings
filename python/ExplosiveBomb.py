@@ -31,7 +31,10 @@ class ExplosiveBomb:
         return self.radius
 
     def getPos(self):
-        return self.pos 
+        return self.pos
 
     def getDamage(self):
-        return self.damage        
+        return self.damage
+
+    def isColliding(self, enemy):
+        return (self.getPos() - enemy.getPos()).length() <= enemy.getRadius() + self.getRadius()
