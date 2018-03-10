@@ -5,6 +5,7 @@ from Gnat import Gnat
 from HUD import HUD
 from PickUp import PickUp
 from Interaction import Interaction
+from Obstacle import Obstacle
 
 try:
     import simplegui
@@ -29,6 +30,7 @@ class Game:
         self.frame.set_keyup_handler(self.keyboard.keyUp)
         self.pickUp = PickUp(WIDTH, HEIGHT, 10000)
         self.wave = 1
+        self.obstacles = Obstacle(WIDTH, HEIGHT)
         self.explosions = []
         self.bullets = []
         self.enemies = []
@@ -84,7 +86,7 @@ class Game:
             enemy.update(self.player)
 
         self.pickUp.update()
-        self.interaction.update(self.explosions);
+        self.interaction.update(self.explosions, self.obstacles.getObstacles());
 
     def draw(self, canvas):
         self.update()
@@ -100,6 +102,7 @@ class Game:
 
         self.hud.draw(canvas, self.wave)
         self.pickUp.draw(canvas)
+        self.obstacles.draw(canvas)
 
     def start(self):
         self.frame.start()
