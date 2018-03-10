@@ -38,3 +38,6 @@ class ExplosiveBomb:
 
     def isColliding(self, enemy):
         return (self.pos - enemy.getPos()).length() <= enemy.getRadius() + self.radius
+
+    def shouldRemove(self):
+        return self.radius <= 0

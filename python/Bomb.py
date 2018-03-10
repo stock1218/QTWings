@@ -1,16 +1,17 @@
 try:
     import simplegui
 except ImportError:
-    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui   
+    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 from Vector import Vector
-from ExplosiveBomb import ExplosiveBomb 
+from ExplosiveBomb import ExplosiveBomb
+from NailBomb import NailBomb
 import random
 
 class Bomb:
 
     def __init__(self, width, height):
-        self.value = ExplosiveBomb()
+        self.value = random.choice([ExplosiveBomb(), NailBomb()])
         #self.value = random.choice([ExplosiveBomb(), NailBomb(), EmpBomb()])
         self.pos = Vector(random.randrange(10, width-10), random.randrange(10, height-10))
         self.radius = 9

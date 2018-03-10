@@ -59,7 +59,7 @@ class Game:
 
         for explosion in self.explosions:
             explosion.update()
-            if(explosion.getRadius() <= 0):
+            if explosion.shouldRemove():
                self.explosions.remove(explosion)
 
 

@@ -5,6 +5,8 @@ except:
 
 from PickUp import PickUp
 from ExplosiveBomb import ExplosiveBomb
+from NailBomb import NailBomb
+
 class Interaction:
     '''Responsible for collisions between objects on the screen'''
 
@@ -37,9 +39,8 @@ class Interaction:
 
         #Check explosions
         for explosion in explosions:
-            if (not explosion.hasExploded()):
-                for enemy in self.enemies:
-                    if explosion.isColliding(enemy):
-                        if type(explosion) is ExplosiveBomb:
-                            enemy.damage(explosion.getDamage())
-                explosion.finish()
+            for enemy in self.enemies:
+                if explosion.isColliding(enemy):
+                    if type(explosion) is ExplosiveBomb or type(explosion) is NailBomb:
+                        enemy.damage(explosion.getDamage())
+            explosion.finish()
