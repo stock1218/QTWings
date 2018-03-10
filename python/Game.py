@@ -6,7 +6,7 @@ from HUD import HUD
 from PickUp import PickUp
 from Interaction import Interaction
 from Obstacle import Obstacle
-
+from Wave import Wave
 try:
     import simplegui
 except ImportError:
@@ -29,13 +29,13 @@ class Game:
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
         self.pickUp = PickUp(WIDTH, HEIGHT, 10000)
-        self.wave = 1
+        self.wave = Wave(WIDTH, HEIGHT, 1)
         self.obstacles = Obstacle(WIDTH, HEIGHT)
         self.explosions = []
         self.bullets = []
-        self.enemies = []
+        #self.enemies = []
 
-        for i in range(20):
+        '''for i in range(20):
             self.enemies.append(Gnat(
                 Vector(randrange(0, 400), randrange(0, 800)),
                 Vector(1, 1),
@@ -43,8 +43,11 @@ class Game:
                 2,
                 1,
                 6
-            ))
-        self.interaction = Interaction(self.player, self.pickUp, self.enemies)
+            ))'''
+        self.interaction = Interaction(self.player, self.pickUp)
+
+        #start the wave
+        self.wave.startWave()
 
     def update(self):
         """Update the game state"""
@@ -70,23 +73,16 @@ class Game:
             if bullet.outOfBounds():
                 self.bullets.remove(bullet)
                 continue
-            for enemy in self.enemies:
-                if (enemy.position - bullet.position).length() < bullet.radius + enemy.radius:
-                    print("HIT")
-                    enemy.health -= 1
-                    if enemy.health == 0:
-                        self.enemies.remove(enemy)
-                        print("DESTROYED")
-                    self.bullets.remove(bullet)
-                    break
 
-        for enemy in self.enemies:
+        self.wave.update(self.player)
+
+        '''for enemy in self.enemies:
             if(enemy.getHealth() <= 0):
                 self.enemies.remove(enemy)
-            enemy.update(self.player)
+            enemy.update(self.player)'''
 
         self.pickUp.update()
-        self.interaction.update(self.explosions, self.obstacles.getObstacles());
+        self.interaction.update(self.wave.getEnemies(), self.explosions, self.obstacles.getObstacles(), self.bullets);
 
     def draw(self, canvas):
         self.update()
@@ -97,10 +93,11 @@ class Game:
         for explosion in self.explosions:
             explosion.draw(canvas)
 
-        for enemy in self.enemies:
-            enemy.draw(canvas)
+        '''for enemy in self.enemies:
+            enemy.draw(canvas)'''
+        self.wave.draw(canvas)
 
-        self.hud.draw(canvas, self.wave)
+        self.hud.draw(canvas, self.wave.getWave())
         self.pickUp.draw(canvas)
         self.obstacles.draw(canvas)
 
