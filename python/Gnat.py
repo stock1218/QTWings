@@ -26,3 +26,15 @@ class Gnat:
 
     def draw(self, canvas):
         canvas.draw_circle(self.position.getP(), self.radius, 1, "#ff0000", "#ff0000")
+
+    def damage(self, damage):
+        self.health -= damage
+
+    def getHealth(self):
+        return self.health   
+ 
+    def getRadius(self):
+        return self.radius
+
+    def getPos(self):
+        return self.position

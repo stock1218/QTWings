@@ -11,12 +11,8 @@ class PowerUp:
     
     def __init__(self, width, height):
         """Construct PowerUp"""
-        self.type = random.choice(['God Mode', 'Shield'])
-        #if(self.type == 'Shield'):
-        self.power = Shield()
-        #else:
-            #self.power = God()
-
+        #self.value = random.choice([God(), Shield()])
+        self.value = Shield()
         self.pos = Vector(random.randrange(10, width-10), random.randrange(10, height-10))
         self.radius = 9 
 
@@ -33,4 +29,4 @@ class PowerUp:
         return 'PowerUp'
 
     def getValue(self):
-        return self.power
+        return self.value

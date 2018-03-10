@@ -29,6 +29,7 @@ class Game:
         self.frame.set_keyup_handler(self.keyboard.keyUp)
         self.pickUp = PickUp(WIDTH, HEIGHT, 10000)
         self.wave = 1
+        self.explosions = []
         self.bullets = []
         self.enemies = []
 
@@ -51,6 +52,17 @@ class Game:
             if b:
                 self.bullets += b
 
+        if self.keyboard.b:
+            bomb = self.player.getBomb()
+            if(bomb):
+                self.explosions.append(self.player.dropBomb()) 
+
+        for explosion in self.explosions:
+            explosion.update() 
+            if(explosion.getRadius() <= 0):
+               self.explosions.remove(explosion)
+
+
         for bullet in self.bullets:
             bullet.update()
             if bullet.outOfBounds():
@@ -67,16 +79,21 @@ class Game:
                     break
 
         for enemy in self.enemies:
+            if(enemy.getHealth() <= 0):
+                self.enemies.remove(enemy)
             enemy.update(self.player)
 
         self.pickUp.update()
-        self.interaction.update();
+        self.interaction.update(self.explosions);
 
     def draw(self, canvas):
         self.update()
         self.player.draw(canvas)
         for bullet in self.bullets:
             bullet.draw(canvas)
+
+        for explosion in self.explosions:
+            explosion.draw(canvas)
 
         for enemy in self.enemies:
             enemy.draw(canvas)

@@ -16,7 +16,7 @@ class Interaction:
     def distanceTo(self, pos1, pos2):
        return (pos1 - pos2).length()
 
-    def update(self):
+    def update(self, explosions):
         '''check for collisions'''
         for i in self.pickUp.getPickUps():
             if(self.distanceTo(i.getPos(), self.player.getPos()) <= self.player.getRadius() + i.getRadius()):
@@ -34,3 +34,11 @@ class Interaction:
                 self.enemies.remove(x)
                 self.player.damage(x.damageDealt)
                 print("PLAYER DAMAGED")
+
+        #Check explosions
+        for explosion in explosions:
+            if (not explosion.hasExploded()):
+                for enemy in self.enemies:
+                    if(self.distanceTo(enemy.getPos(), explosion.getPos()) <= enemy.getRadius() + explosion.getRadius()):
+                        enemy.damage(explosion.getDamage())
+                explosion.finish()

@@ -4,6 +4,7 @@ except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 from Weapon import Weapon
+from Bomb import Bomb
 from PowerUp import PowerUp
 import random
 
@@ -24,7 +25,7 @@ class PickUp:
         if(len(self.pickUps) > self.maxPickUps):
             self.pickUps.pop(0)
 
-        self.pickUps.append(random.choice([PowerUp(self.width, self.height), Weapon(self.width, self.height)]))
+        self.pickUps.append(random.choice([PowerUp(self.width, self.height), Weapon(self.width, self.height), Bomb(self.width, self.height)]))
 
     def setInterval(self, min, max):
         self.min = min

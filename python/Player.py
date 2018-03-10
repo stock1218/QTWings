@@ -22,6 +22,7 @@ class Player:
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
         self.weapon = Shotgun()
+        self.bomb = None
         self.powerUp = None
         self.noDamage = False
         self.timer = simplegui.create_timer(1000, self.countDown)
@@ -77,8 +78,10 @@ class Player:
             self.collisionRadius = pickUp.getRadius()
             self.noDamage = True
             self.timer.start()
-        else:
+        elif(type == 'Weapon'):
             self.weapon = pickUp
+        else:
+            self.bomb = pickUp
 
         print("PICKED UP: " + type) 
 
@@ -88,8 +91,17 @@ class Player:
             self.powerUp = None
             self.timer.stop()
 
+    def getBomb(self):
+        return self.bomb
+
     def fire(self):
         return self.weapon.fire(self.width, self.height, self.position, self.directionVector)
+
+    def dropBomb(self):
+        self.bomb.explode(self.position)
+        bomb = self.bomb
+        self.bomb = None
+        return bomb
 
     def getPos(self):
         return self.position

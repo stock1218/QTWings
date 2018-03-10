@@ -8,23 +8,17 @@ from Shotgun import Shotgun
 
 class Weapon:
     def __init__(self, width, height):
-        self.type = random.choice([PeaShooter(), Shotgun()])
-        #self.type = random.choice([PeaShooter(), Bomb(), EMP(), NailBomb()])
-        self.pos = Vector(random.randrange(10, width-10), random.randrange(10, width-10))
+        self.value = random.choice([PeaShooter(), Shotgun()])
+        #self.value = random.choice([PeaShooter(), Bomb(), EMP(), NailBomb()])
+        self.pos = Vector(random.randrange(10, width-10), random.randrange(10, height-10))
         self.pickUp = False
         self.radius = 9
 
-    def draw(self, canvas):
-       canvas.draw_circle(self.pos.getP(), 9, 1, 'Green', 'Green') 
-
     def getValue(self):
-        return self.type
+        return self.value
 
     def draw(self, canvas):
          canvas.draw_circle(self.pos.getP(), 9, 1, 'Blue', 'Blue')
-
-    def isPickedUp(self):
-        return self.pickedUp
 
     def getPos(self):
         return self.pos
@@ -32,11 +26,5 @@ class Weapon:
     def getRadius(self):
         return self.radius
 
-    def pickUp(self):
-        self.pickedUp = True
-
     def getType(self):
         return 'Weapon'
-
-    def getPower(self):
-        return None
