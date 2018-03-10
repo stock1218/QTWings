@@ -81,9 +81,12 @@ class Player:
         if(type == 'PowerUp'):
             self.powerUp = pickUp
             self.collisionRadius = pickUp.getRadius()
+
+        elif (type == 'Weapon'):
             self.weapon = pickUp
         else:
-            self.bomb = pickUp
+            if(not self.bomb):
+                self.bomb = pickUp
 
         print("PICKED UP: " + type) 
 
@@ -95,6 +98,9 @@ class Player:
         bomb = self.bomb
         self.bomb = None
         return bomb
+
+    def getBomb(self):
+        return self.bomb
 
     def getPos(self):
         return self.position
