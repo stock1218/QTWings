@@ -43,4 +43,11 @@ class Interaction:
                         if type(explosion) is ExplosiveBomb:
                             enemy.damage(explosion.getDamage())
                 explosion.finish()
+        
+        #check for collisions with the walls
+        for ob in obstacles:
+            collision = ob.isColliding(self.player.getPos(), self.player.getRadius())
+            if (collision):
+                print("PLAYER COLLIDING")
+                self.player.bounce(collision)
 

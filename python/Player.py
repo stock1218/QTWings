@@ -93,6 +93,9 @@ class Player:
     def fire(self):
         return self.weapon.fire(self.width, self.height, self.position, self.directionVector)
 
+    def bounce(self, normal):
+        self.velocity.reflect(normal) 
+
     def dropBomb(self):
         self.bomb.explode(self.position)
         bomb = self.bomb
