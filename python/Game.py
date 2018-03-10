@@ -20,7 +20,7 @@ class Game:
 
     def __init__(self):
         """Constructor - Initialise game state and prepare the canvas"""
-        self.player = Player(WIDTH, HEIGHT, Vector(200, 400))
+        self.player = Player(WIDTH, HEIGHT, Vector(WIDTH/2, HEIGHT/2))
         self.keyboard = Keyboard()
         self.hud = HUD(self.player, WIDTH, HEIGHT)
         self.frame = simplegui.create_frame("QTWings", WIDTH, HEIGHT)
@@ -55,10 +55,10 @@ class Game:
         if self.keyboard.b:
             bomb = self.player.getBomb()
             if(bomb):
-                self.explosions.append(self.player.dropBomb()) 
+                self.explosions.append(self.player.dropBomb())
 
         for explosion in self.explosions:
-            explosion.update() 
+            explosion.update()
             if(explosion.getRadius() <= 0):
                self.explosions.remove(explosion)
 
