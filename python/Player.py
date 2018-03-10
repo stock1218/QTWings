@@ -24,8 +24,6 @@ class Player:
         self.weapon = Shotgun()
         self.bomb = None
         self.powerUp = None
-        self.noDamage = False
-        self.timer = simplegui.create_timer(1000, self.countDown)
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
@@ -63,6 +61,13 @@ class Player:
 
         self.velocity *= 0.98
 
+        #checking shield
+        if(self.powerUp):
+            self.powerUp.tick()
+            if(self.powerUp.getStatus()):
+                self.powerUp = None
+                self.collisionRadius = self.radius
+
     def draw(self, canvas):
         canvas.draw_circle(self.position.getP(), self.radius, 1, "#0000ff", "#0000ff")
         canvas.draw_line(self.position.getP(),
@@ -76,23 +81,11 @@ class Player:
         if(type == 'PowerUp'):
             self.powerUp = pickUp
             self.collisionRadius = pickUp.getRadius()
-            self.noDamage = True
-            self.timer.start()
-        elif(type == 'Weapon'):
             self.weapon = pickUp
         else:
             self.bomb = pickUp
 
         print("PICKED UP: " + type) 
-
-    def countDown(self):
-        self.powerUp.tick()
-        if(self.powerUp.status()):
-            self.powerUp = None
-            self.timer.stop()
-
-    def getBomb(self):
-        return self.bomb
 
     def fire(self):
         return self.weapon.fire(self.width, self.height, self.position, self.directionVector)
@@ -116,7 +109,7 @@ class Player:
         return self.health
 
     def damage(self, amount):
-        if(self.noDamage):
-            pass
+        if(self.powerUp):
+            self.powerUp.damage(amount)
         else:
             self.health -= amount
