@@ -4,7 +4,7 @@ except:
         import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
 from PickUp import PickUp
-
+from ExplosiveBomb import ExplosiveBomb
 class Interaction:
     '''Responsible for collisions between objects on the screen'''
 
