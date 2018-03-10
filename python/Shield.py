@@ -10,20 +10,21 @@ class Shield:
     def __init__(self):
         self.health = 3
         self.radius = 30
-        self.duration = 10
         self.isDone = False
 
     def draw(self, canvas, pos):
         canvas.draw_circle(pos.getP(), self.radius, 1, 'rgba(0, 255, 0, 0.3)', 'rgba(0, 255, 0, 0.3)')
    
     def tick(self):
-       print("Time Left: " + str(self.duration))
-       self.duration -= 1
-       if(self.duration <= 0):
+       if(self.health <= 0):
            self.isDone = True
 
     def getRadius(self):
         return self.radius
  
-    def status(self):
+    def getStatus(self):
         return self.isDone
+
+    def damage(self, amount):
+        self.health -= amount
+        print("SHIELD HEALTH: " + str(self.health))

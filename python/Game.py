@@ -32,7 +32,7 @@ class Game:
         self.bullets = []
         self.enemies = []
 
-        for i in range(5):
+        for i in range(20):
             self.enemies.append(Gnat(
                 Vector(randrange(0, 400), randrange(0, 800)),
                 Vector(1, 1),
