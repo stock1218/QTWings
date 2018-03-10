@@ -24,6 +24,7 @@ class Player:
         self.weapon = Shotgun()
         self.bomb = None
         self.powerUp = None
+        self.inCollision = False
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
@@ -35,7 +36,8 @@ class Player:
         """Update the Player state (should be called by Game.update)"""
         # Turning and acceleration
         if kbd.up:
-            self.velocity += self.directionVector() * 0.3
+            if(not self.inCollision):
+                self.velocity += self.directionVector() * 0.3
         if kbd.left:
             self.rotate(-2.5)
         if kbd.right:
@@ -95,6 +97,7 @@ class Player:
 
     def bounce(self, normal):
         self.velocity.reflect(normal) 
+        self.velocity *= 0.7
 
     def dropBomb(self):
         self.bomb.explode(self.position)

@@ -45,9 +45,15 @@ class Interaction:
                 explosion.finish()
         
         #check for collisions with the walls
+        collision = None
         for ob in obstacles:
             collision = ob.isColliding(self.player.getPos(), self.player.getRadius())
-            if (collision):
-                print("PLAYER COLLIDING")
-                self.player.bounce(collision)
+            if(collision):
+                break
+
+        if (collision and not self.player.inCollision):
+            self.player.bounce(collision)
+            self.player.inCollision = True
+        elif (not collision and self.player.inCollision):
+            self.player.inCollision = False
 

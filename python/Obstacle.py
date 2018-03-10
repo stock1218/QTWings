@@ -11,7 +11,7 @@ class Obstacle:
 
     def __init__(self, width, height):
         self.obstacles = []
-        for i in range(20):
+        for i in range(10):
             size = randrange(10,50)
             self.obstacles.append(Box(
                 Vector(randrange(0, width), randrange(0, height)), 
@@ -23,4 +23,5 @@ class Obstacle:
 
     def draw(self, canvas):
         for i in self.obstacles:
-           i.draw(canvas) 
+            canvas.draw_polygon(i.points, i.thickness, 'Blue', 'White') 
+            #i.draw(canvas) 
