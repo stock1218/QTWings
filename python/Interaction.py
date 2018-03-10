@@ -45,6 +45,11 @@ class Interaction:
                     enemies.remove(enemy)
                     bullets.remove(bullet)
 
+        #Removing bullets out of bounds
+        for bullet in bullets:
+            if bullet.outOfBounds():
+                bullets.remove(bullet)
+
         #Check explosions
         for explosion in explosions:
             for enemy in enemies:

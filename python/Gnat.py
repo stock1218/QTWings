@@ -14,7 +14,8 @@ class Gnat:
         self.damageDealt = 1
 
     def update(self, player):
-        toPlayer = player.position - self.position
+
+        toPlayer = player.getPos() - self.position
 
         self.velocity += toPlayer.normalize() * self.acceleration
 

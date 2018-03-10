@@ -67,12 +67,8 @@ class Game:
             if explosion.shouldRemove():
                self.explosions.remove(explosion)
 
-
         for bullet in self.bullets:
             bullet.update()
-            if bullet.outOfBounds():
-                self.bullets.remove(bullet)
-                continue
 
         self.wave.update(self.player)
 

@@ -11,7 +11,7 @@ except ImportError:
 class Player:
     """Object providing a representation of the player"""
 
-    def __init__(self, width, height,initialPos):
+    def __init__(self, width, height, initialPos):
         """Initialise a new Player object"""
         self.width = width
         self.height = height
