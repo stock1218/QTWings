@@ -18,7 +18,7 @@ class Interaction:
     def distanceTo(self, pos1, pos2):
        return (pos1 - pos2).length()
 
-    def update(self, explosions):
+    def update(self, explosions, obstacles):
         '''check for collisions'''
         for i in self.pickUp.getPickUps():
             if(self.distanceTo(i.getPos(), self.player.getPos()) <= self.player.getRadius() + i.getRadius()):
@@ -44,3 +44,17 @@ class Interaction:
                     if type(explosion) is ExplosiveBomb or type(explosion) is NailBomb:
                         enemy.damage(explosion.getDamage())
             explosion.finish()
+        
+        #check for collisions with the walls
+        collision = None
+        for ob in obstacles:
+            collision = ob.isColliding(self.player.getPos(), self.player.getRadius())
+            if(collision):
+                break
+
+        if (collision and not self.player.inCollision):
+            self.player.bounce(collision)
+            self.player.inCollision = True
+        elif (not collision and self.player.inCollision):
+            self.player.inCollision = False
+
