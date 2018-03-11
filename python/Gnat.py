@@ -12,11 +12,12 @@ class Gnat:
         self.health = health
         self.radius = radius
         self.damageDealt = 1
+        self.inCollision = None
 
     def update(self, player):
 
         toPlayer = player.getPos() - self.position
-
+        
         self.velocity += toPlayer.normalize() * self.acceleration
 
         if self.velocity.length() >= self.velocityLimit:
@@ -39,3 +40,13 @@ class Gnat:
 
     def getPos(self):
         return self.position
+  
+    #Bounce but for other enemies 
+    def moveAway(self, pos):
+        normal = (pos - self.position).normalize()
+        self.bounce(normal)
+ 
+    def bounce(self, normal):
+        self.velocity.reflect(normal)
+        #This pushes the enemy away from whatever they are colliding with
+        self.velocity.subtract(normal * self.velocity.length() * 2)

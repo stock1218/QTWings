@@ -6,7 +6,8 @@ class Bullet:
         self.velocity = velocity
         self.radius = 3
         self.damage = 1
-        self.inCollision = False
+        self.inCollision = None
+        self.bounces = 0
 
     def draw(self, canvas):
         canvas.draw_circle(self.position.getP(), self.radius, 1, "#00ff00", "#00ff00")
@@ -16,6 +17,7 @@ class Bullet:
 
     def bounce(self, normal):
         self.velocity.reflect(normal)
+        self.bounces += 1
 
     def getPos(self):
         return self.position

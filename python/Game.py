@@ -65,7 +65,7 @@ class Game:
         self.wave.update(self.player)
         self.pickUp.update()
         self.interaction.update(self.wave.getEnemies(), self.explosions, self.obstacles.getObstacles(), self.bullets);
-
+    
     def draw(self, canvas):
         self.update()
         self.player.draw(canvas)

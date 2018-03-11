@@ -27,11 +27,11 @@ class Interaction:
         '''enemy collisions with each other and player'''
         for x in enemies:
             for y in enemies:
-                if (x.position != y.position) and (x.position - y.position).length() - 3 < x.radius * 2:
-                    x.position += x.position.copy().subtract(y.position).normalize()
-                    y.position += y.position.copy().subtract(x.position).normalize()
+                if (x != y) and (x.getPos() - y.getPos()).length() - 3 < x.radius * 2:
+                    x.moveAway(y.getPos())
+                    y.moveAway(x.getPos())
 
-            if (self.player.position - x.position).length() <= self.player.getCollisionRadius() + 1 + x.radius:
+            if (self.player.getPos() - x.getPos()).length() <= self.player.getCollisionRadius() + x.getRadius():
                 enemies.remove(x)
                 self.player.damage(x.damageDealt)
                 print("PLAYER DAMAGED")
@@ -44,25 +44,25 @@ class Interaction:
                 if(collision):
                     break
 
-            if (collision and not bullet.inCollision):
+            if (collision and not bullet.inCollision == ob):
                 bullet.bounce(collision)
-                bullet.inCollision = True
+                bullet.inCollision = ob
             elif (not collision and bullet.inCollision):
-                bullet.inCollision = False
+                bullet.inCollision = None
 
         #Check for collisions with enemies and bullets
         for bullet in bullets:
             for enemy in enemies:
-                if(enemy.position - bullet.position).length() <= bullet.radius + enemy.radius:
+                if(enemy.getPos() - bullet.getPos()).length() <= bullet.getRadius() + enemy.getRadius():
                     print("HIT")
                     enemy.damage(bullet.getDamage())
                     enemies.remove(enemy)
                     bullets.remove(bullet)
                     break
 
-        #Removing bullets out of bounds
+        #Removing bullets out of bounds or if they have bounced more than 2 times
         for bullet in bullets:
-            if bullet.outOfBounds():
+            if bullet.outOfBounds() or bullet.bounces > 2:
                 bullets.remove(bullet)
 
         #Check explosions
@@ -73,16 +73,30 @@ class Interaction:
                         enemy.damage(explosion.getDamage())
             explosion.finish()
         
-        #check for collisions with the walls
+        #check for collisions with the walls and the player
         collision = None
         for ob in obstacles:
             collision = ob.isColliding(self.player.getPos(), self.player.getRadius())
             if(collision):
                 break
 
-        if (collision and not self.player.inCollision):
+        if (collision and not self.player.inCollision == ob):
             self.player.bounce(collision)
-            self.player.inCollision = True
+            self.player.inCollision = ob
         elif (not collision and self.player.inCollision):
-            self.player.inCollision = False
+            self.player.inCollision = None
+
+        #check for collisions with the walls and the enemies
+        for enemy in enemies:
+            collision = None
+            for ob in obstacles:
+                collision = ob.isColliding(enemy.getPos(), enemy.getRadius())
+                if(collision):
+                    break
+
+            if(collision and not enemy.inCollision == ob):
+                enemy.bounce(collision)
+                enemy.inCollision = ob
+            elif(not collision and enemy.inCollision):
+                enemy.inCollision = None
 

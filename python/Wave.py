@@ -9,12 +9,14 @@ class Wave:
         self.height = height
         self.wave = 1
         self.enemies = []
+        self.isOn = False
 
     def getWave(self):
         return self.wave
 
     def startWave(self):
         #populate enemies and start the wave
+        self.isOn = True
         for i in range(self.wave):
             gnats = 5 * self.wave
 
@@ -50,14 +52,15 @@ class Wave:
             
 
     def update(self, player):
-        #check if the wave is over, then start a new one
-        #also update all the enemies 
-        if len(self.enemies) == 0:
-            self.wave += 1
-            self.startWave()
+        if(self.isOn):
+            #check if the wave is over, then start a new one
+            #also update all the enemies 
+            if len(self.enemies) == 0:
+                self.wave += 1
+                self.startWave()
 
-        for i in self.enemies:
-            i.update(player)
+            for i in self.enemies:
+                i.update(player)
 
     def draw(self, canvas):
         #draw all the enemies
