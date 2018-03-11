@@ -58,6 +58,7 @@ class Interaction:
                     enemy.damage(bullet.getDamage())
                     enemies.remove(enemy)
                     bullets.remove(bullet)
+                    break
 
         #Removing bullets out of bounds
         for bullet in bullets:
