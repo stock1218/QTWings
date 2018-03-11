@@ -10,7 +10,7 @@ class NailBomb:
     def __init__(self):
         self.pos = None
         self.exploded = False
-        self.bulletCount = 72
+        self.bulletCount = 30
         self.bullets = []
         self.damage = 10
 
