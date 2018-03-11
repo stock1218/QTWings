@@ -29,13 +29,13 @@ class Game:
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
         self.pickUp = PickUp(WIDTH, HEIGHT, 10000)
-        self.wave = Wave(WIDTH, HEIGHT, 1)
+        self.wave = Wave(WIDTH, HEIGHT, 1, 5)
         self.obstacles = Obstacle(WIDTH, HEIGHT)
         self.explosions = []
         self.bullets = []
         self.interaction = Interaction(self.player, self.pickUp)
 
-        self.bulletLimit = 60
+        self.bulletLimit = 40
 
         #start the wave
         self.wave.startWave()
@@ -72,7 +72,7 @@ class Game:
         if(len(self.bullets) > self.bulletLimit):
             self.bullets = self.bullets[len(self.bullets) - self.bulletLimit:] 
 
-        print(len(self.bullets))
+#        print(len(self.bullets))
 
     def draw(self, canvas):
         self.update()
