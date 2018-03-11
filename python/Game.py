@@ -33,17 +33,6 @@ class Game:
         self.obstacles = Obstacle(WIDTH, HEIGHT)
         self.explosions = []
         self.bullets = []
-        #self.enemies = []
-
-        '''for i in range(20):
-            self.enemies.append(Gnat(
-                Vector(randrange(0, 400), randrange(0, 800)),
-                Vector(1, 1),
-                0.2,
-                2,
-                1,
-                6
-            ))'''
         self.interaction = Interaction(self.player, self.pickUp)
 
         #start the wave
@@ -71,12 +60,6 @@ class Game:
             bullet.update()
 
         self.wave.update(self.player)
-
-        '''for enemy in self.enemies:
-            if(enemy.getHealth() <= 0):
-                self.enemies.remove(enemy)
-            enemy.update(self.player)'''
-
         self.pickUp.update()
         self.interaction.update(self.wave.getEnemies(), self.explosions, self.obstacles.getObstacles(), self.bullets);
 
@@ -89,13 +72,10 @@ class Game:
         for explosion in self.explosions:
             explosion.draw(canvas)
 
-        '''for enemy in self.enemies:
-            enemy.draw(canvas)'''
         self.wave.draw(canvas)
-
-        self.hud.draw(canvas, self.wave.getWave())
         self.pickUp.draw(canvas)
         self.obstacles.draw(canvas)
+        self.hud.draw(canvas, self.wave.getWave())
 
     def start(self):
         self.frame.start()
