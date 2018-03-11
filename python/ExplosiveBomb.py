@@ -7,7 +7,7 @@ class ExplosiveBomb:
 
     def __init__(self):
         self.damage = 10
-        self.radius = 40
+        self.radius = 70
         self.pos = None
         self.exploded = False
 
@@ -35,6 +35,12 @@ class ExplosiveBomb:
 
     def getDamage(self):
         return self.damage
+
+    def getType(self):
+        return 'Explosive'
+
+    def getBomb(self):
+        return self
 
     def isColliding(self, enemy):
         return (self.pos - enemy.getPos()).length() <= enemy.getRadius() + self.radius

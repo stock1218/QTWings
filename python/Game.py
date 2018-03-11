@@ -49,7 +49,10 @@ class Game:
         if self.keyboard.b:
             bomb = self.player.getBomb()
             if(bomb):
-                self.explosions.append(self.player.dropBomb())
+                if(bomb.getType() == 'Nail'):
+                    self.bullets += self.player.dropBomb()
+                else:    
+                    self.explosions.append(self.player.dropBomb())
 
         for explosion in self.explosions:
             explosion.update()

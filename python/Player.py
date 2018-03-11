@@ -101,7 +101,7 @@ class Player:
 
     def dropBomb(self):
         self.bomb.explode(self.position)
-        bomb = self.bomb
+        bomb = self.bomb.getBomb()
         self.bomb = None
         return bomb
 

@@ -29,6 +29,12 @@ class NailBomb:
     def finish(self):
         self.exploded = True
 
+    def getType(self):
+        return 'Nail'
+
+    def getBomb(self):
+        return self.bullets
+
     def draw(self, canvas):
         for bullet in self.bullets:
             bullet.draw(canvas)
