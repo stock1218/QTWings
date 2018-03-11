@@ -35,6 +35,8 @@ class Game:
         self.bullets = []
         self.interaction = Interaction(self.player, self.pickUp)
 
+        self.bulletLimit = 60
+
         #start the wave
         self.wave.startWave()
 
@@ -65,7 +67,13 @@ class Game:
         self.wave.update(self.player)
         self.pickUp.update()
         self.interaction.update(self.wave.getEnemies(), self.explosions, self.obstacles.getObstacles(), self.bullets);
-    
+       
+        #limiting the number of bullets 
+        if(len(self.bullets) > self.bulletLimit):
+            self.bullets = self.bullets[len(self.bullets) - self.bulletLimit:] 
+
+        print(len(self.bullets))
+
     def draw(self, canvas):
         self.update()
         self.player.draw(canvas)
