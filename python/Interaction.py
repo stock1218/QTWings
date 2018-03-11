@@ -36,6 +36,20 @@ class Interaction:
                 self.player.damage(x.damageDealt)
                 print("PLAYER DAMAGED")
 
+        #Rebound bullets that hit obstacles
+        collision = None
+        for bullet in bullets:
+            for ob in obstacles:
+                collision = ob.isColliding(bullet.getPos(), bullet.getRadius())
+                if(collision):
+                    break
+
+            if (collision and not bullet.inCollision):
+                bullet.bounce(collision)
+                bullet.inCollision = True
+            elif (not collision and bullet.inCollision):
+                bullet.inCollision = False
+
         #Check for collisions with enemies and bullets
         for bullet in bullets:
             for enemy in enemies:
