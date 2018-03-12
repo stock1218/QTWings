@@ -5,8 +5,8 @@ except ImportError:
 
 from Game import Game
 
-WIDTH = 1600
-HEIGHT = 1200
+WIDTH = 900
+HEIGHT = 600
 
 '''
 states:
@@ -19,6 +19,7 @@ textColor = 'Red'
 
 frame = simplegui.create_frame("QTWings", WIDTH, HEIGHT)
 game = Game(WIDTH, HEIGHT, frame)
+button = None
 
 def drawTitle(canvas):
 
@@ -33,9 +34,13 @@ def drawTitle(canvas):
     canvas.draw_text(subtitle, (WIDTH/2 - margin, HEIGHT/2 + 40), subtitleSize, textColor)
     
 def drawGame(frame, canvas):
+    global state
     game.draw(canvas, True)
     if (not game.inGame):
-        changeState()    
+
+        #change state to game over
+        state = 2    
+        button.set_text("Return to Title")
 
 def drawGameOver(canvas):
     game.draw(canvas, False)
@@ -61,15 +66,19 @@ def draw(canvas):
         drawGameOver(canvas)
 
 def changeState():
-    global state, WIDTH, HEIGHT, frame, game
+    global state, WIDTH, HEIGHT, frame, game, button
 
     #start a new game
     if state == 0:
         game = Game(WIDTH, HEIGHT, frame)
+        button.set_text("End Game")
+        state = 1
+    
+    else:
+        button.set_text("Start Game")
+        state = 0
 
-    state = (state + 1) % 3 
 
-
+button = frame.add_button("Start Game", changeState)
 frame.set_draw_handler(draw)
-frame.add_button("Start Game", changeState)
 frame.start()
