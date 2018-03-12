@@ -26,7 +26,7 @@ class Player:
         self.weapon = Shotgun()
         self.bomb = None
         self.powerUp = None
-        self.spriteSheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1, self.radius)
+        self.spriteSheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1, self.radius, 3)
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)

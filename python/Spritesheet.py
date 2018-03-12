@@ -10,7 +10,7 @@ import math
 
 
 class Spritesheet():
-    def __init__(self, img, columns, rows, radius):
+    def __init__(self, img, columns, rows, radius, timer):
         self.img = simplegui.load_image(img)
         self.columns = columns
         self.rows = rows
@@ -22,6 +22,8 @@ class Spritesheet():
         self.frameCentreY = self.frameHeight / 2
         self.frameIndex = [0, 0]
         self.radius = radius
+        self.clock = Clock()
+        self.timer = timer
 
     def draw(self, canvas, position, rotation):
         #        self.img = simplegui.load_image(img)
@@ -40,18 +42,20 @@ class Spritesheet():
 
     def update(self, canvas, position, rotation):
 
-        self.frameIndex[0] = (self.frameIndex[0] + 1) % self.columns
-        if self.frameIndex[0] == 0:
-            self.frameIndex[1] = (self.frameIndex[1] + 1) % self.rows
+        self.clock.tick()
+        if self.clock.transition(self.timer):
+            self.frameIndex[0] = (self.frameIndex[0] + 1) % self.columns
+            if self.frameIndex[0] == 0:
+                self.frameIndex[1] = (self.frameIndex[1] + 1) % self.rows
         self.draw(canvas, position, rotation)
 
 
 class Clock():
-    def __init__(self, time):
-        self.time = time
+    def __init__(self):
+        self.time = 0
 
     def tick(self):
         self.time += 1
 
     def transition(self, frameDuration):
-        return (self.time % frameDuration == 0)
+        return self.time % frameDuration == 0
