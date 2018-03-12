@@ -29,16 +29,23 @@ class Game:
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
         self.pickUp = PickUp(WIDTH, HEIGHT, 10000)
-        self.wave = Wave(WIDTH, HEIGHT, 1, 5)
+        self.wave = Wave(WIDTH, HEIGHT, 1, 20)
         self.obstacles = Obstacle(WIDTH, HEIGHT)
         self.explosions = []
         self.bullets = []
         self.interaction = Interaction(self.player, self.pickUp)
 
-        self.bulletLimit = 40
+        self.bulletLimit = 90
 
+        self.frameTimer = simplegui.create_timer(1000, self.calcFPS)
+        self.fps = 0
+        self.frameCount = 0
+        
         #start the wave
         self.wave.startWave()
+        
+        #start the fps timer
+        self.frameTimer.start()
 
     def update(self):
         """Update the game state"""
@@ -72,9 +79,9 @@ class Game:
         if(len(self.bullets) > self.bulletLimit):
             self.bullets = self.bullets[len(self.bullets) - self.bulletLimit:] 
 
-#        print(len(self.bullets))
-
     def draw(self, canvas):
+        self.frameCount += 1
+
         self.update()
         self.player.draw(canvas)
         for bullet in self.bullets:
@@ -86,7 +93,11 @@ class Game:
         self.wave.draw(canvas)
         self.pickUp.draw(canvas)
         self.obstacles.draw(canvas)
-        self.hud.draw(canvas, self.wave.getWave())
+        self.hud.draw(canvas, self.wave.getWave(), self.fps)
+
+    def calcFPS(self):
+        self.fps = self.frameCount
+        self.frameCount = 0
 
     def start(self):
         self.frame.start()

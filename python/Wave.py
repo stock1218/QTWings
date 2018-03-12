@@ -7,7 +7,7 @@ class Wave:
     def __init__(self, width, height, wave, limit):
         self.width = width
         self.height = height
-        self.wave = 1
+        self.wave = 0
         self.nonActiveEnemies = []
         self.enemies = []
         self.isOn = False

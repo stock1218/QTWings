@@ -7,7 +7,7 @@ class ExplosiveBomb:
 
     def __init__(self):
         self.damage = 10
-        self.radius = 70
+        self.radius = 100
         self.pos = None
         self.exploded = False
 
