@@ -1,4 +1,8 @@
-import simplegui
+try:
+    import simplegui
+except ImportError:
+    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+import math
 
 # img = simplegui.load_image('http://www.cs.rhul.ac.uk/courses/CS1830/sprites/runnerSheet.png')
 # width = img.get_width()
@@ -6,7 +10,7 @@ import simplegui
 
 
 class Spritesheet():
-    def __init__(self, img, columns, rows):
+    def __init__(self, img, columns, rows, radius):
         self.img = simplegui.load_image(img)
         self.columns = columns
         self.rows = rows
@@ -17,24 +21,29 @@ class Spritesheet():
         self.frameCentreX = self.frameWidth / 2
         self.frameCentreY = self.frameHeight / 2
         self.frameIndex = [0, 0]
+        self.radius = radius
 
-    def draw(self, canvas):
+    def draw(self, canvas, position, rotation):
         #        self.img = simplegui.load_image(img)
 
+        self.position = position
+        self.rotation = rotation
         canvas.draw_image(
             self.img,  # image URL
             (self.frameWidth * self.frameIndex[0] + self.frameCentreX,
              self.frameHeight * self.frameIndex[1] + self.frameCentreY),  # center_source
             (self.frameWidth, self.frameHeight),  # width_height_source
-            (self.frameWidth / 2, self.frameHeight / 2),  # center_dest
-            (self.frameWidth, self.frameHeight)  # width_height_dest
+            self.position.getP(),  # center_dest
+            (self.radius * 7, self.radius * 7),  # width_height_dest
+            self.rotation / (180 / math.pi)  # rotation
         )
 
-    def update(self, canvas):
+    def update(self, canvas, position, rotation):
+
         self.frameIndex[0] = (self.frameIndex[0] + 1) % self.columns
         if self.frameIndex[0] == 0:
             self.frameIndex[1] = (self.frameIndex[1] + 1) % self.rows
-        self.draw(canvas)
+        self.draw(canvas, position, rotation)
 
 
 class Clock():

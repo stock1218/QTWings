@@ -2,6 +2,7 @@ from Vector import Vector
 from Bullet import Bullet
 from PeaShooter import PeaShooter
 from Shotgun import Shotgun
+from Spritesheet import Spritesheet
 import math
 try:
     import simplegui
@@ -25,7 +26,7 @@ class Player:
         self.weapon = Shotgun()
         self.bomb = None
         self.powerUp = None
-        self.spritesheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1)
+        self.spriteSheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1, self.radius)
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
@@ -72,10 +73,10 @@ class Player:
 
     def draw(self, canvas, kbd):
         if kbd.up:
-            Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1)
+            self.spriteSheet.update(canvas, self.position, self.rotation)
         else:
             canvas.draw_image(simplegui.load_image('https://i.imgur.com/ZUpcygF.png'), (16, 15),
-                              (20, 16), self.position.getP(), (self.radius * 4, self.radius * 4),
+                              (18, 18), self.position.getP(), (self.radius * 4, self.radius * 4),
                               self.rotation / (180 / math.pi))
         #canvas.draw_circle(self.position.getP(), self.radius, 1, "#0000ff", "#0000ff")
         #canvas.draw_line(self.position.getP(),
