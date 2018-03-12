@@ -103,6 +103,9 @@ class Game:
         self.fps = self.frameCount
         self.frameCount = 0
 
+    def getScore(self):
+        return self.wave.getWave()
+
     def start(self):
         self.frame.start()
 

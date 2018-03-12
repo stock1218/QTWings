@@ -16,31 +16,42 @@ states:
 '''
 state = 0
 textColor = 'Red'
+highScore = 0
 
 frame = simplegui.create_frame("QTWings", WIDTH, HEIGHT)
 game = Game(WIDTH, HEIGHT, frame)
 button = None
 
 def drawTitle(canvas):
-
+    global highScore
     title = "QT Wings"
     titleSize = 40
+
     subtitle = "Click the button to start a game"
     subtitleSize = 20
+
+    highScoreText = "High Score: " + str(highScore)
+    highScoreTextSize = 20
+
     margin = frame.get_canvas_textwidth(title, titleSize)/2 
     canvas.draw_text(title, (WIDTH/2 - margin, HEIGHT/2), titleSize, textColor)
     
     margin = frame.get_canvas_textwidth(subtitle, subtitleSize)/2 
     canvas.draw_text(subtitle, (WIDTH/2 - margin, HEIGHT/2 + 40), subtitleSize, textColor)
+
+    margin = frame.get_canvas_textwidth(highScoreText, highScoreTextSize)/2
+    canvas.draw_text(highScoreText, (WIDTH/2 - margin, HEIGHT/2 + 80), highScoreTextSize, textColor)
     
 def drawGame(frame, canvas):
-    global state
+    global state, highScore
     game.draw(canvas, True)
     if (not game.inGame):
 
         #change state to game over
         state = 2    
         button.set_text("Return to Title")
+        if game.getScore() > highScore:
+            highScore = game.getScore()
 
 def drawGameOver(canvas):
     game.draw(canvas, False)
