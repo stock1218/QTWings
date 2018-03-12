@@ -16,16 +16,17 @@ class PickUp:
         self.height = height
         self.pickUps = []
         self.maxPickUps = 5
+        self.inGame = False
         self.timer = simplegui.create_timer(interval, self.tick)
         self.timer.start()
-        self.tick()
 
     def tick(self):
         """Add a random type of pickup (PowerUp, Weapon(Gun, Bomb)) to pickups[] and reset the timer to a different interval"""
-        if(len(self.pickUps) > self.maxPickUps):
-            self.pickUps.pop(0)
+        if(self.inGame):
+            if(len(self.pickUps) > self.maxPickUps):
+                self.pickUps.pop(0)
 
-        self.pickUps.append(random.choice([PowerUp(self.width, self.height), Weapon(self.width, self.height), Bomb(self.width, self.height)]))
+            self.pickUps.append(random.choice([PowerUp(self.width, self.height), Weapon(self.width, self.height), Bomb(self.width, self.height)]))
 
     def setInterval(self, min, max):
         self.min = min
@@ -42,8 +43,9 @@ class PickUp:
         getPickUp = self.pickUps.pop(self.pickUps.index(pickUp))
         return getPickUp.getValue()
  
-    def update(self):
+    def update(self, inGame):
         """would be used to update sprites"""
+        self.inGame = inGame
         pass
 	
     def draw(self, canvas):

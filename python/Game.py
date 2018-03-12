@@ -13,33 +13,32 @@ except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 from random import randrange
 
-WIDTH = 800
-HEIGHT = 600
-
 class Game:
     """Object responsible for the high level organisation of the game"""
 
-    def __init__(self):
+    def __init__(self, WIDTH, HEIGHT, frame):
         """Constructor - Initialise game state and prepare the canvas"""
         self.player = Player(WIDTH, HEIGHT, Vector(WIDTH/2, HEIGHT/2))
         self.keyboard = Keyboard()
         self.hud = HUD(self.player, WIDTH, HEIGHT)
-        self.frame = simplegui.create_frame("QTWings", WIDTH, HEIGHT)
-        self.frame.set_draw_handler(self.draw)
+        self.frame = frame
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
         self.pickUp = PickUp(WIDTH, HEIGHT, 10000)
-        self.wave = Wave(WIDTH, HEIGHT, 1, 20)
+        self.wave = Wave(WIDTH, HEIGHT, 1, 10)
         self.obstacles = Obstacle(WIDTH, HEIGHT)
         self.explosions = []
         self.bullets = []
         self.interaction = Interaction(self.player, self.pickUp)
 
-        self.bulletLimit = 90
+        self.bulletLimit = 60
 
         self.frameTimer = simplegui.create_timer(1000, self.calcFPS)
         self.fps = 0
         self.frameCount = 0
+
+        #set inGame to true
+        self.inGame = True
         
         #start the wave
         self.wave.startWave()
@@ -49,6 +48,9 @@ class Game:
 
     def update(self):
         """Update the game state"""
+        if(self.player.getHealth() == 0):
+            self.inGame = False
+
         self.player.update(self.keyboard)
         if self.keyboard.space:
             b = self.player.fire()
@@ -72,17 +74,19 @@ class Game:
             bullet.update()
 
         self.wave.update(self.player)
-        self.pickUp.update()
+        self.pickUp.update(self.inGame)
         self.interaction.update(self.wave.getEnemies(), self.explosions, self.obstacles.getObstacles(), self.bullets);
        
         #limiting the number of bullets 
         if(len(self.bullets) > self.bulletLimit):
             self.bullets = self.bullets[len(self.bullets) - self.bulletLimit:] 
 
-    def draw(self, canvas):
+    def draw(self, canvas, inGame):
         self.frameCount += 1
 
-        self.update()
+        if inGame:
+            self.update()
+
         self.player.draw(canvas)
         for bullet in self.bullets:
             bullet.draw(canvas)
@@ -102,7 +106,3 @@ class Game:
     def start(self):
         self.frame.start()
 
-
-if __name__ == "__main__":
-    game = Game()
-    game.start()
