@@ -88,7 +88,7 @@ class Game:
 
     def draw(self, canvas):
         self.update()
-        self.player.draw(canvas)
+        self.player.draw(canvas, self.keyboard)
         for bullet in self.bullets:
             bullet.draw(canvas)
 
