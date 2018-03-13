@@ -35,7 +35,11 @@ class Gnat:
         self.position += self.velocity
 
     def draw(self, canvas):
-        canvas.draw_circle(self.position.getP(), self.radius, 1, "#ff0000", "#ff0000")
+        canvas.draw_image(simplegui.load_image("https://i.imgur.com/DfeRGaR.png"), (16, 16),
+                          (simplegui.load_image("https://i.imgur.com/DfeRGaR.png").get_width(),
+                           simplegui.load_image("https://i.imgur.com/DfeRGaR.png").get_height()),
+                          self.position.getP(), (self.radius * 2, self.radius * 2))
+        # canvas.draw_circle(self.position.getP(), self.radius, 1, "#ff0000", "#ff0000")
 
     def damage(self, damage):
         self.health -= damage
