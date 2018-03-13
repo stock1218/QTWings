@@ -24,10 +24,10 @@ class Player:
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
-        self.weapon = Shotgun()
+        self.weapon = PeaShooter(5)
         self.bomb = None
         self.powerUp = None
-        self.inCollision = None 
+        self.inCollision = None
         self.spriteSheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1, self.radius, 6)
 
     def directionVector(self):
@@ -103,7 +103,7 @@ class Player:
             if(not self.bomb):
                 self.bomb = pickUp
 
-        print("PICKED UP: " + type) 
+        print("PICKED UP: " + type)
 
     def fire(self):
         return self.weapon.fire(self.width, self.height, self.position, self.directionVector)

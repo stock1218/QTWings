@@ -8,7 +8,7 @@ from Shotgun import Shotgun
 
 class Weapon:
     def __init__(self, width, height):
-        self.value = random.choice([PeaShooter(), Shotgun()])
+        self.value = random.choice([PeaShooter(20), Shotgun()])
         self.pos = Vector(random.randrange(10, width-10), random.randrange(10, height-10))
         self.pickUp = False
         self.radius = 9
