@@ -4,6 +4,7 @@ from PeaShooter import PeaShooter
 from Shotgun import Shotgun
 from Spritesheet import Spritesheet
 import math
+from EMP import EMP
 try:
     import simplegui
 except ImportError:
