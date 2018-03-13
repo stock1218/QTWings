@@ -46,7 +46,6 @@ def drawGame(frame, canvas):
     global state, highScore
     game.draw(canvas, True)
     if (not game.inGame):
-
         #change state to game over
         state = 2    
         button.set_text("Return to Title")

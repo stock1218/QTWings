@@ -2,6 +2,7 @@ from Vector import Vector
 from Bullet import Bullet
 from PeaShooter import PeaShooter
 from Shotgun import Shotgun
+from EMP import EMP
 try:
     import simplegui
 except ImportError:

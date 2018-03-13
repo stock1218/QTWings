@@ -6,13 +6,13 @@ except ImportError:
 from Vector import Vector
 from ExplosiveBomb import ExplosiveBomb
 from NailBomb import NailBomb
+from EMP import EMP
 import random
 
 class Bomb:
 
     def __init__(self, width, height):
-        self.value = random.choice([ExplosiveBomb(), NailBomb()])
-        #self.value = random.choice([ExplosiveBomb(), NailBomb(), EmpBomb()])
+        self.value = random.choice([ExplosiveBomb(), NailBomb(), EMP()])
         self.pos = Vector(random.randrange(10, width-10), random.randrange(10, height-10))
         self.radius = 9
 

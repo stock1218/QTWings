@@ -6,6 +6,7 @@ except:
 from PickUp import PickUp
 from ExplosiveBomb import ExplosiveBomb
 from NailBomb import NailBomb
+from EMP import EMP
 
 class Interaction:
     '''Responsible for collisions between objects on the screen'''
@@ -18,13 +19,13 @@ class Interaction:
        return (pos1 - pos2).length()
 
     def update(self, enemies, explosions, obstacles, bullets):
-        '''check for collisions'''
+        #check for collisions
         for i in self.pickUp.getPickUps():
             if(self.distanceTo(i.getPos(), self.player.getPos()) <= self.player.getRadius() + i.getRadius()):
                 self.player.givePickUp(self.pickUp.getType(i), self.pickUp.givePickUp(i))
                 print("PICKUP")
 
-        '''enemy collisions with each other and player'''
+        #enemy collisions with each other and player
         for x in enemies:
             for y in enemies:
                 if (x != y) and (x.getPos() - y.getPos()).length() - 3 < x.radius * 2:
@@ -68,9 +69,11 @@ class Interaction:
         #Check explosions
         for explosion in explosions:
             for enemy in enemies:
-                if explosion.isColliding(enemy):
+                if explosion.isColliding(enemy) and not explosion.exploded:
                     if type(explosion) is ExplosiveBomb or type(explosion) is NailBomb:
                         enemy.damage(explosion.getDamage())
+                    elif type(explosion) is EMP:
+                        enemy.stun(explosion.getTime())
             explosion.finish()
         
         #check for collisions with the walls and the player

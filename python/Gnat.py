@@ -1,3 +1,8 @@
+try:
+    import simplegui
+except ImportError:
+    import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
+
 import math
 from Vector import Vector
 class Gnat:
@@ -13,12 +18,15 @@ class Gnat:
         self.radius = radius
         self.damageDealt = 1
         self.inCollision = None
+        self.stunned = False
+        self.timer = simplegui.create_timer(1000, self.tick)
 
     def update(self, player):
 
         toPlayer = player.getPos() - self.position
         
-        self.velocity += toPlayer.normalize() * self.acceleration
+        if(not self.stunned):
+            self.velocity += toPlayer.normalize() * self.acceleration
 
         if self.velocity.length() >= self.velocityLimit:
             self.velocity.normalize()
@@ -32,6 +40,14 @@ class Gnat:
     def damage(self, damage):
         self.health -= damage
 
+    def tick(self):
+        if(self.stunTime == 0):
+            self.stunned = False
+            self.timer.stop()
+            
+        else:
+            self.stunTime-= 1
+
     def getHealth(self):
         return self.health   
  
@@ -40,6 +56,12 @@ class Gnat:
 
     def getPos(self):
         return self.position
+
+    def stun(self, time):
+        self.stunned = True 
+        print("Stunned for " + str(time))
+        self.stunTime = time
+        self.timer.start()
   
     #Bounce but for other enemies 
     def moveAway(self, pos):
