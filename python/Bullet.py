@@ -28,5 +28,11 @@ class Bullet:
     def getDamage(self):
         return self.damage
 
+    def getType(self):
+        return 'bullet'
+
+    def isColliding(self, enemy):
+        return (enemy.getPos() - self.position).length() <= self.radius + enemy.getRadius()
+
     def outOfBounds(self):
         return (self.position.x < 0) or (self.position.x > self.width) or (self.position.y < 0) or (self.position.y > self.height)

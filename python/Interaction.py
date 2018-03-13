@@ -54,11 +54,13 @@ class Interaction:
         #Check for collisions with enemies and bullets
         for bullet in bullets:
             for enemy in enemies:
-                if(enemy.getPos() - bullet.getPos()).length() <= bullet.getRadius() + enemy.getRadius():
+                if(bullet.isColliding(enemy)):
                     print("HIT")
                     enemy.damage(bullet.getDamage())
-                    enemies.remove(enemy)
-                    bullets.remove(bullet)
+                    if bullet.getType() == 'bullet':
+                        bullets.remove(bullet)
+                    else:
+                        pass
                     break
 
         #Removing bullets out of bounds or if they have bounced more than 2 times
