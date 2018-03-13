@@ -15,7 +15,6 @@ class Box:
         self.height = height
         self.vectorPoints = [self.pos, Vector(self.pos.x + self.width, self.pos.y), Vector(self.pos.x + self.width, self.pos.y + self.height), Vector(self.pos.x, self.pos.y + self.height)]  
         self.points = [(i.getP()) for i in self.vectorPoints]
-        print('POINTS: ' + str(self.points))
         self.lines = [ Line(self.thickness, self.vectorPoints[i], self.vectorPoints[(i + 1) % len(self.vectorPoints)])
                         for i in range(len(self.points)) ] 
     def draw(self, canvas):

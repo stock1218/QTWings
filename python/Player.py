@@ -2,6 +2,8 @@ from Vector import Vector
 from Bullet import Bullet
 from PeaShooter import PeaShooter
 from Shotgun import Shotgun
+from Spritesheet import Spritesheet
+import math
 try:
     import simplegui
 except ImportError:
@@ -25,6 +27,7 @@ class Player:
         self.bomb = None
         self.powerUp = None
         self.inCollision = None 
+        self.spriteSheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1, self.radius, 6)
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
@@ -69,11 +72,21 @@ class Player:
                 self.powerUp = None
                 self.collisionRadius = self.radius
 
-    def draw(self, canvas):
-        canvas.draw_circle(self.position.getP(), self.radius, 1, "#0000ff", "#0000ff")
-        canvas.draw_line(self.position.getP(),
-                         (self.position + self.directionVector() * 15).getP(),
-                         4, "#0000ff")
+    def draw(self, canvas, kbd, inGame):
+        if kbd.up and inGame:
+            self.spriteSheet.update(canvas, self.position, self.rotation)
+        else:
+            canvas.draw_image(simplegui.load_image('https://i.imgur.com/ZUpcygF.png'),
+                              (simplegui.load_image('https://i.imgur.com/ZUpcygF.png').get_width() / 2,
+                               simplegui.load_image('https://i.imgur.com/ZUpcygF.png').get_height() / 2),
+                              (simplegui.load_image('https://i.imgur.com/ZUpcygF.png').get_width(),
+                               simplegui.load_image('https://i.imgur.com/ZUpcygF.png').get_height())
+                              , self.position.getP(), (self.radius * 7, self.radius * 7),
+                              self.rotation / (180 / math.pi))
+        #canvas.draw_circle(self.position.getP(), self.radius, 1, "#0000ff", "#0000ff")
+        #canvas.draw_line(self.position.getP(),
+        #                 (self.position + self.directionVector() * 15).getP(),
+        #                 4, "#0000ff")
 
         if(self.powerUp):
             self.powerUp.draw(canvas, self.position)

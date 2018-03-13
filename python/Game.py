@@ -83,11 +83,13 @@ class Game:
 
     def draw(self, canvas, inGame):
         self.frameCount += 1
+        self.player.draw(canvas, self.keyboard, self.inGame)
 
-        if inGame:
+        if(inGame):
             self.update()
 
-        self.player.draw(canvas)
+        self.player.draw(canvas, self.keyboard, inGame)
+
         for bullet in self.bullets:
             bullet.draw(canvas)
 
