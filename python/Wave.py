@@ -1,4 +1,5 @@
 from Gnat import Gnat
+from BigGnat import BigGnat
 from Vector import Vector
 import random
 
@@ -21,8 +22,10 @@ class Wave:
         self.isOn = True
         totalGnats = 5 * self.wave
 
-        for i in range(totalGnats):
+        for i in range(totalGnats -1):
             self.nonActiveEnemies.append(self.addGnat())
+
+        self.nonActiveEnemies.append(self.addBigGnat())
 
     def update(self, player):
         if(self.isOn):
@@ -35,7 +38,8 @@ class Wave:
             for i in self.enemies:
                 i.update(player)
 
-            self.enemies.append
+                if i.getType == BigGnat:
+                    i.fire()
 
             while len(self.enemies) < self.gnatLimit and len(self.nonActiveEnemies) > 0:
                 self.enemies.append(self.nonActiveEnemies.pop())
@@ -45,24 +49,31 @@ class Wave:
         for i in self.enemies:
             i.draw(canvas)
 
-    def addGnat(self): 
+    def spawnPos(self):
         edge = random.choice(['top', 'bottom', 'left', 'right'])
 
-        if(edge == 'top'):
+        if (edge == 'top'):
             spawnX = random.randrange(0, self.width)
             spawnY = random.randrange(-500, -100)
 
-        elif(edge == 'bottom'):
+        elif (edge == 'bottom'):
             spawnX = random.randrange(0, self.width)
             spawnY = random.randrange(self.height + 100, self.height + 500)
 
-        elif(edge == 'left'):
+        elif (edge == 'left'):
             spawnX = random.randrange(-500, -100)
             spawnY = random.randrange(0, self.width)
-  
+
         else:
             spawnX = random.randrange(self.width + 100, self.width + 500)
-            spawnY = random.randrange(0, self.width) 
+            spawnY = random.randrange(0, self.width)
+
+        return spawnX, spawnY
+
+    def addGnat(self):
+        positionToSpawn = self.spawnPos()
+        spawnX = positionToSpawn[0]
+        spawnY = positionToSpawn[1]
                 
         return Gnat(
             Vector(spawnX, spawnY),
@@ -71,6 +82,20 @@ class Wave:
             2,
             1,
             6
+        )
+
+    def addBigGnat(self):
+        positionToSpawn = self.spawnPos()
+        spawnX = positionToSpawn[0]
+        spawnY = positionToSpawn[1]
+
+        return BigGnat(
+            Vector(spawnX, spawnY),
+            Vector(1, 1),
+            0.2,
+            2,
+            1,
+            10
         )
 
     def getEnemies(self):

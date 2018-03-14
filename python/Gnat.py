@@ -62,7 +62,10 @@ class Gnat:
         print("Stunned for " + str(time))
         self.stunTime = time
         self.timer.start()
-  
+
+    def getType(self):
+        return 'Gnat'
+
     #Bounce but for other enemies 
     def moveAway(self, pos):
         normal = (pos - self.position).normalize()
