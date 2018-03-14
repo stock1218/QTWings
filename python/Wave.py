@@ -22,7 +22,7 @@ class Wave:
         self.isOn = True
         totalGnats = 5 * self.wave
 
-        for i in range(totalGnats -1):
+        for i in range(totalGnats - 1):
             self.nonActiveEnemies.append(self.addGnat())
 
         self.nonActiveEnemies.append(self.addBigGnat())
@@ -37,9 +37,6 @@ class Wave:
 
             for i in self.enemies:
                 i.update(player)
-
-                if i.getType == BigGnat:
-                    i.fire()
 
             while len(self.enemies) < self.gnatLimit and len(self.nonActiveEnemies) > 0:
                 self.enemies.append(self.nonActiveEnemies.pop())

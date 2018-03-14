@@ -7,6 +7,7 @@ from PickUp import PickUp
 from Interaction import Interaction
 from Obstacle import Obstacle
 from Wave import Wave
+from BigGnat import BigGnat
 try:
     import simplegui
 except ImportError:
@@ -29,6 +30,7 @@ class Game:
         self.obstacles = Obstacle(WIDTH, HEIGHT)
         self.explosions = []
         self.bullets = []
+        self.enemies = []
         self.interaction = Interaction(self.player, self.pickUp)
 
         self.bulletLimit = 60
@@ -48,6 +50,7 @@ class Game:
 
     def update(self):
         """Update the game state"""
+        self.enemies = self.wave.getEnemies()
         if(self.player.getHealth() == 0):
             self.inGame = False
 
@@ -56,6 +59,12 @@ class Game:
             b = self.player.fire()
             if b:
                 self.bullets += b
+
+        for i in self.enemies:
+            if i.getType == 'BigGnat':
+                b = i.fire()
+                if b:
+                    self.bullets += b
 
         if self.keyboard.b:
             bomb = self.player.getBomb()
@@ -75,7 +84,7 @@ class Game:
 
         self.wave.update(self.player)
         self.pickUp.update(self.inGame)
-        self.interaction.update(self.wave.getEnemies(), self.explosions, self.obstacles.getObstacles(), self.bullets);
+        self.interaction.update(self.enemies, self.explosions, self.obstacles.getObstacles(), self.bullets);
        
         #limiting the number of bullets 
         if(len(self.bullets) > self.bulletLimit):
