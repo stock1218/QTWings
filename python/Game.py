@@ -1,97 +1,113 @@
 from Player import Player
 from Keyboard import Keyboard
 from Vector import Vector
-from Enemy import Enemy
+from Gnat import Gnat
 from HUD import HUD
 from PickUp import PickUp
 from Interaction import Interaction
-
+from Obstacle import Obstacle
+from Wave import Wave
 try:
     import simplegui
 except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 from random import randrange
 
-WIDTH = 800
-HEIGHT = 600
-
 class Game:
     """Object responsible for the high level organisation of the game"""
 
-    def __init__(self):
+    def __init__(self, WIDTH, HEIGHT, frame):
         """Constructor - Initialise game state and prepare the canvas"""
-        self.player = Player(WIDTH, HEIGHT, Vector(200, 400))
+        self.player = Player(WIDTH, HEIGHT, Vector(WIDTH/2, HEIGHT/2))
         self.keyboard = Keyboard()
         self.hud = HUD(self.player, WIDTH, HEIGHT)
-        self.frame = simplegui.create_frame("QTWings", WIDTH, HEIGHT)
-        self.frame.set_draw_handler(self.draw)
+        self.frame = frame
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
-        self.pickUp = PickUp(WIDTH, HEIGHT)
-        self.wave = 1
+        self.pickUp = PickUp(WIDTH, HEIGHT, 10000)
+        self.wave = Wave(WIDTH, HEIGHT, 1, 10)
+        self.obstacles = Obstacle(WIDTH, HEIGHT)
+        self.explosions = []
         self.bullets = []
-        self.enemies = []
-
-        for i in range(5):
-            self.enemies.append(Enemy(
-                Vector(randrange(0, 400), randrange(0, 800)),
-                Vector(1, 1),
-                0.2,
-                2,
-                1,
-                6
-            ))
-
         self.interaction = Interaction(self.player, self.pickUp)
+
+        self.bulletLimit = 60
+
+        self.frameTimer = simplegui.create_timer(1000, self.calcFPS)
+        self.fps = 0
+        self.frameCount = 0
+
+        #set inGame to true
+        self.inGame = True
+        
+        #start the wave
+        self.wave.startWave()
+        
+        #start the fps timer
+        self.frameTimer.start()
 
     def update(self):
         """Update the game state"""
+        if(self.player.getHealth() == 0):
+            self.inGame = False
+
         self.player.update(self.keyboard)
         if self.keyboard.space:
             b = self.player.fire()
             if b:
-                self.bullets.append(b)
+                self.bullets += b
+
+        if self.keyboard.b:
+            bomb = self.player.getBomb()
+            if(bomb):
+                if(bomb.getType() == 'Nail'):
+                    self.bullets += self.player.dropBomb()
+                else:    
+                    self.explosions.append(self.player.dropBomb())
+
+        for explosion in self.explosions:
+            explosion.update()
+            if explosion.shouldRemove():
+               self.explosions.remove(explosion)
 
         for bullet in self.bullets:
             bullet.update()
-            if bullet.outOfBounds():
-                self.bullets.remove(bullet)
-                continue
-            for enemy in self.enemies:
-                if (enemy.position - bullet.position).length() < bullet.radius + enemy.radius:
-                    print("HIT")
-                    enemy.health -= 1
-                    if enemy.health == 0:
-                        self.enemies.remove(enemy)
-                        print("DESTROYED")
-                    self.bullets.remove(bullet)
-                    break
 
-        for enemy in self.enemies:
-            enemy.update(self.player)
-            for i in self.enemies:
-                if (enemy.position != i.position) and (enemy.position - i.position).length() + 1 < enemy.radius * 4:
-                    enemy.position += enemy.position.copy().subtract(i.position).normalize()
-                    i.position += i.position.copy().subtract(enemy.position).normalize()
-        self.pickUp.update()
-        self.interaction.update();
+        self.wave.update(self.player)
+        self.pickUp.update(self.inGame)
+        self.interaction.update(self.wave.getEnemies(), self.explosions, self.obstacles.getObstacles(), self.bullets);
+       
+        #limiting the number of bullets 
+        if(len(self.bullets) > self.bulletLimit):
+            self.bullets = self.bullets[len(self.bullets) - self.bulletLimit:] 
 
-    def draw(self, canvas):
-        self.update()
-        self.player.draw(canvas)
+    def draw(self, canvas, inGame):
+        self.frameCount += 1
+        self.player.draw(canvas, self.keyboard, self.inGame)
+
+        if(inGame):
+            self.update()
+
+        self.player.draw(canvas, self.keyboard, inGame)
+
         for bullet in self.bullets:
             bullet.draw(canvas)
 
-        for enemy in self.enemies:
-            enemy.draw(canvas)
+        for explosion in self.explosions:
+            explosion.draw(canvas)
 
-        self.hud.draw(canvas, self.wave)
+        self.wave.draw(canvas)
         self.pickUp.draw(canvas)
+        self.obstacles.draw(canvas)
+        self.hud.draw(canvas, self.wave.getWave(), self.fps)
+
+    def calcFPS(self):
+        self.fps = self.frameCount
+        self.frameCount = 0
+
+    def getScore(self):
+        return self.wave.getWave()
 
     def start(self):
         self.frame.start()
 
-
-if __name__ == "__main__":
-    game = Game()
-    game.start()

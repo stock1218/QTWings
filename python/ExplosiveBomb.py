@@ -3,10 +3,10 @@ try:
 except ImportError:
     import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 
-class EMP:
+class ExplosiveBomb:
 
     def __init__(self):
-        self.time = 5
+        self.damage = 10
         self.radius = 100
         self.pos = None
         self.exploded = False
@@ -22,7 +22,7 @@ class EMP:
         self.exploded = True
 
     def draw(self, canvas):
-        canvas.draw_circle(self.pos.getP(), self.radius, 1, 'White')
+        canvas.draw_circle(self.pos.getP(), self.radius, 1, 'Red', 'Red')
 
     def hasExploded(self):
         return self.exploded
@@ -33,11 +33,11 @@ class EMP:
     def getPos(self):
         return self.pos
 
-    def getTime(self):
-        return self.time
+    def getDamage(self):
+        return self.damage
 
     def getType(self):
-        return 'EMP'
+        return 'Explosive'
 
     def getBomb(self):
         return self
