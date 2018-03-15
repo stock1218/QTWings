@@ -15,9 +15,12 @@ class Bomb:
         self.value = random.choice([ExplosiveBomb(), NailBomb(), EMP()])
         self.pos = Vector(random.randrange(10, width-10), random.randrange(10, height-10))
         self.radius = 9
+        self.sprite = simplegui.load_image("https://i.imgur.com/cxXIRXF.png")
 
     def draw(self, canvas):
-        canvas.draw_circle(self.pos.getP(), 9, 1, 'Green', 'Green')
+        canvas.draw_image(self.sprite, (16, 16), (self.sprite.get_width(), self.sprite.get_height()),
+                          self.pos.getP(), (self.radius * 2, self.radius * 2))
+        # canvas.draw_circle(self.pos.getP(), 9, 1, 'Green', 'Green')
 
     def getValue(self):
         return self.type

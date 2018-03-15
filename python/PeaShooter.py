@@ -6,9 +6,9 @@ except ImportError:
 from Bullet import Bullet
 
 class PeaShooter:
-    def __init__(self):
+    def __init__(self, fr):
         self.canFire = True
-        self.fireRate = 5  # Rounds per second
+        self.fireRate = fr  # Rounds per second
         self.fireTimer = simplegui.create_timer(1000 / self.fireRate, self.resetFire)
 
 

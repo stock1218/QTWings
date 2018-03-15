@@ -20,6 +20,7 @@ class Gnat:
         self.inCollision = None
         self.stunned = False
         self.timer = simplegui.create_timer(1000, self.tick)
+        self.sprite = simplegui.load_image("https://i.imgur.com/DfeRGaR.png")
 
     def update(self, player):
 
@@ -35,7 +36,10 @@ class Gnat:
         self.position += self.velocity
 
     def draw(self, canvas):
-        canvas.draw_circle(self.position.getP(), self.radius, 1, "#ff0000", "#ff0000")
+        canvas.draw_image(self.sprite, (16, 16),
+                          (self.sprite.get_width(), self.sprite.get_height()),
+                          self.position.getP(), (self.radius * 2, self.radius * 2))
+        # canvas.draw_circle(self.position.getP(), self.radius, 1, "#ff0000", "#ff0000")
 
     def damage(self, damage):
         self.health -= damage

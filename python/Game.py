@@ -26,14 +26,14 @@ class Game:
         self.frame.set_keydown_handler(self.keyboard.keyDown)
         self.frame.set_keyup_handler(self.keyboard.keyUp)
         self.pickUp = PickUp(WIDTH, HEIGHT, 10000)
-        self.wave = Wave(WIDTH, HEIGHT, 1, 10)
+        self.wave = Wave(WIDTH, HEIGHT, 1, 5)
         self.obstacles = Obstacle(WIDTH, HEIGHT)
         self.explosions = []
         self.bullets = []
         self.enemies = []
         self.interaction = Interaction(self.player, self.pickUp)
 
-        self.bulletLimit = 60
+        self.bulletLimit = 30
 
         self.frameTimer = simplegui.create_timer(1000, self.calcFPS)
         self.fps = 0
@@ -92,7 +92,6 @@ class Game:
 
     def draw(self, canvas, inGame):
         self.frameCount += 1
-        self.player.draw(canvas, self.keyboard, self.inGame)
 
         if(inGame):
             self.update()

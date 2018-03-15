@@ -24,11 +24,12 @@ class Player:
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
-        self.weapon = Shotgun()
+        self.weapon = PeaShooter(5)
         self.bomb = None
         self.powerUp = None
-        self.inCollision = None 
-        self.spriteSheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1, self.radius, 6)
+        self.inCollision = None
+        self.stationarySprite = simplegui.load_image('https://i.imgur.com/ZUpcygF.png')
+        self.forwardSpritesheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1, self.radius, 6)
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
@@ -75,14 +76,12 @@ class Player:
 
     def draw(self, canvas, kbd, inGame):
         if kbd.up and inGame:
-            self.spriteSheet.update(canvas, self.position, self.rotation)
+            self.forwardSpritesheet.update(canvas, self.position, self.rotation)
         else:
-            canvas.draw_image(simplegui.load_image('https://i.imgur.com/ZUpcygF.png'),
-                              (simplegui.load_image('https://i.imgur.com/ZUpcygF.png').get_width() / 2,
-                               simplegui.load_image('https://i.imgur.com/ZUpcygF.png').get_height() / 2),
-                              (simplegui.load_image('https://i.imgur.com/ZUpcygF.png').get_width(),
-                               simplegui.load_image('https://i.imgur.com/ZUpcygF.png').get_height())
-                              , self.position.getP(), (self.radius * 7, self.radius * 7),
+            canvas.draw_image(self.stationarySprite,
+                              (self.stationarySprite.get_width() / 2, self.stationarySprite.get_height() / 2),
+                              (self.stationarySprite.get_width(), self.stationarySprite.get_height()),
+                              self.position.getP(), (self.radius * 7, self.radius * 7),
                               self.rotation / (180 / math.pi))
         #canvas.draw_circle(self.position.getP(), self.radius, 1, "#0000ff", "#0000ff")
         #canvas.draw_line(self.position.getP(),
@@ -103,7 +102,7 @@ class Player:
             if(not self.bomb):
                 self.bomb = pickUp
 
-        print("PICKED UP: " + type) 
+        print("PICKED UP: " + type)
 
     def fire(self):
         return self.weapon.fire(self.width, self.height, self.position, self.directionVector)

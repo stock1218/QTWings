@@ -78,7 +78,7 @@ class Wave:
             0.2,
             2,
             1,
-            6
+            12
         )
 
     def addBigGnat(self):
