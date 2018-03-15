@@ -8,7 +8,7 @@ from Game import Game
 WIDTH = 900
 HEIGHT = 600
 
-'''
+''' 
 states:
     0 = Title
     1 = Game

@@ -17,7 +17,7 @@ class PeaShooter:
             self.canFire = False
             self.fireTimer.start()
             return [Bullet(
-                width, height, (position + directionVector() * 16), directionVector() * 8)]
+                width, height, (position + (directionVector() * 16)), directionVector() * 8)]
         return None
 
     def resetFire(self):

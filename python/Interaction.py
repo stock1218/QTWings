@@ -62,6 +62,13 @@ class Interaction:
                     else:
                         pass
                     break
+            if bullet.isColliding(self.player):
+                self.player.damage(bullet.getDamage())
+                print("PLAYER SHOT")
+                if bullet.getType() == 'bullet':
+                    bullets.remove(bullet)
+                else:
+                    pass
 
         #Removing bullets out of bounds or if they have bounced more than 2 times
         for bullet in bullets:

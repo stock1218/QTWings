@@ -92,7 +92,7 @@ class Wave:
             0.2,
             2,
             1,
-            10
+            20
         )
 
     def getEnemies(self):

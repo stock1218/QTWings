@@ -61,10 +61,11 @@ class Game:
                 self.bullets += b
 
         for i in self.enemies:
-            if i.getType == 'BigGnat':
-                b = i.fire()
+            if i.getType() == 'BigGnat':
+                b = i.fire(self.player)
                 if b:
                     self.bullets += b
+                    print("i fired yo")
 
         if self.keyboard.b:
             bomb = self.player.getBomb()
