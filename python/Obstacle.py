@@ -5,8 +5,7 @@ except:
 
 from Box import Box
 from Vector import Vector
-from random import randrange
-
+from random import randrange, choice
 
 class Obstacle:
 
@@ -15,7 +14,8 @@ class Obstacle:
         for i in range(10):
             size = randrange(50,70)
             self.obstacles.append(Box(
-                Vector(randrange(0, width), randrange(0, height)), 
+                Vector(choice(list(range(0, width // 2 - 100)) + list(range(width // 2 + 100, width))),
+                       choice(list(range(0, height // 2 - 100)) + list(range(height // 2 + 100, height)))),
                 size,
                 size))
         self.sprite = simplegui.load_image("https://i.imgur.com/JWaXkha.png")
