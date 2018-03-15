@@ -5,6 +5,8 @@ from Shotgun import Shotgun
 from Spritesheet import Spritesheet
 import math
 from EMP import EMP
+from ExplosiveBomb import ExplosiveBomb
+
 try:
     import simplegui
 except ImportError:
@@ -25,7 +27,7 @@ class Player:
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
         self.weapon = PeaShooter(5)
-        self.bomb = None
+        self.bomb = ExplosiveBomb()
         self.powerUp = None
         self.inCollision = None
         self.stationarySprite = simplegui.load_image('https://i.imgur.com/ZUpcygF.png')

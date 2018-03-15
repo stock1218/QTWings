@@ -72,6 +72,7 @@ class Interaction:
                 if explosion.isColliding(enemy) and not explosion.exploded:
                     if type(explosion) is ExplosiveBomb or type(explosion) is NailBomb:
                         enemy.damage(explosion.getDamage())
+                        print("Damaged Enemy")
                     elif type(explosion) is EMP:
                         enemy.stun(explosion.getTime())
             explosion.finish()
