@@ -7,7 +7,7 @@ class Wave:
     def __init__(self, width, height, wave, limit):
         self.width = width
         self.height = height
-        self.wave = wave
+        self.wave = wave - 1
         self.nonActiveEnemies = []
         self.enemies = []
         self.isOn = False
@@ -34,11 +34,14 @@ class Wave:
 
             for i in self.enemies:
                 i.update(player)
+                if i.getHealth() <= 0:
+                   self.enemies.remove(i)
 
             self.enemies.append
 
             while len(self.enemies) < self.gnatLimit and len(self.nonActiveEnemies) > 0:
                 self.enemies.append(self.nonActiveEnemies.pop())
+
 
     def draw(self, canvas):
         #draw all the enemies
