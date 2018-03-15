@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="247953fd-5e44-4eba-b944-3381df9f2f30" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/python/BigGnat.py" afterPath="$PROJECT_DIR$/python/BigGnat.py" />
       <change beforePath="$PROJECT_DIR$/python/Game.py" afterPath="$PROJECT_DIR$/python/Game.py" />
-      <change beforePath="$PROJECT_DIR$/python/Interaction.py" afterPath="$PROJECT_DIR$/python/Interaction.py" />
-      <change beforePath="$PROJECT_DIR$/python/PeaShooter.py" afterPath="$PROJECT_DIR$/python/PeaShooter.py" />
-      <change beforePath="$PROJECT_DIR$/python/Start.py" afterPath="$PROJECT_DIR$/python/Start.py" />
-      <change beforePath="$PROJECT_DIR$/python/Wave.py" afterPath="$PROJECT_DIR$/python/Wave.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Game.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Game.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/python/Game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="67" column="39" lean-forward="false" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="39" />
+            <state relative-caret-position="210">
+              <caret line="66" column="37" lean-forward="false" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -111,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BigGnat.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BigGnat.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python/BigGnat.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="16" column="35" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+            <state relative-caret-position="105">
+              <caret line="5" column="93" lean-forward="true" selection-start-line="5" selection-start-column="93" selection-end-line="5" selection-end-column="93" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -162,8 +156,8 @@
         <option value="$PROJECT_DIR$/python/Wave.py" />
         <option value="$PROJECT_DIR$/python/PeaShooter.py" />
         <option value="$PROJECT_DIR$/python/Interaction.py" />
-        <option value="$PROJECT_DIR$/python/Game.py" />
         <option value="$PROJECT_DIR$/python/BigGnat.py" />
+        <option value="$PROJECT_DIR$/python/Game.py" />
       </list>
     </option>
   </component>
@@ -777,16 +771,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/Game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="67" column="39" lean-forward="false" selection-start-line="67" selection-start-column="39" selection-end-line="67" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python/PeaShooter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -797,10 +781,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/python/BigGnat.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="35" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+        <state relative-caret-position="105">
+          <caret line="5" column="93" lean-forward="true" selection-start-line="5" selection-start-column="93" selection-end-line="5" selection-end-column="93" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/Game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="66" column="37" lean-forward="false" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>

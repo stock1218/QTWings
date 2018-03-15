@@ -65,7 +65,6 @@ class Game:
                 b = i.fire(self.player)
                 if b:
                     self.bullets += b
-                    print("i fired yo")
 
         if self.keyboard.b:
             bomb = self.player.getBomb()
