@@ -18,7 +18,7 @@ class Obstacle:
                 Vector(randrange(0, width), randrange(0, height)), 
                 size,
                 size))
-        self.sprite = simplegui.load_image("https://i.imgur.com/lZIjk.png")
+        self.sprite = simplegui.load_image("https://i.imgur.com/JWaXkha.png")
 
     def getObstacles(self):
         return self.obstacles

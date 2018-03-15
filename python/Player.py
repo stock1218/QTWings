@@ -5,6 +5,8 @@ from Shotgun import Shotgun
 from Spritesheet import Spritesheet
 import math
 from EMP import EMP
+from ExplosiveBomb import ExplosiveBomb
+
 try:
     import simplegui
 except ImportError:
