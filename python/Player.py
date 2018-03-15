@@ -27,7 +27,7 @@ class Player:
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
         self.weapon = PeaShooter(5)
-        self.bomb = ExplosiveBomb()
+        self.bomb = None
         self.powerUp = None
         self.inCollision = None
         self.stationarySprite = simplegui.load_image('https://i.imgur.com/ZUpcygF.png')
