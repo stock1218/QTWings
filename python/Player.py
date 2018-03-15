@@ -31,7 +31,7 @@ class Player:
         self.powerUp = None
         self.inCollision = None
         self.stationarySprite = simplegui.load_image('https://i.imgur.com/ZUpcygF.png')
-        self.forwardSpritesheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1, self.radius, 6)
+        self.forwardSpritesheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1, self.radius, 6, False)
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
