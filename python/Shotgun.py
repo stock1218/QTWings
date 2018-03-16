@@ -11,14 +11,14 @@ class Shotgun:
         self.fireTimer = simplegui.create_timer(1000 / self.fireRate, self.resetFire)
 
 
-    def fire(self, width, height, position, directionVector):
+    def fire(self, width, height, position, directionVector, isGood):
         if self.canFire:
             self.canFire = False
             self.fireTimer.start()
             bullets = []
             for i in range(8):
                 bullets.append(Bullet(width, height,
-                    position + directionVector() * 16, directionVector().rotate(randrange(-30, 30)) * 6))
+                    position + directionVector() * 16, directionVector().rotate(randrange(-30, 30)) * 6, True))
             return bullets
         return None
 

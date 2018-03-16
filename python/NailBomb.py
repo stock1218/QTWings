@@ -17,7 +17,7 @@ class NailBomb:
     def explode(self, pos):
         facing = Vector(0, -1)
         for i in range(self.bulletCount):
-            self.bullets.append(Bullet(800, 600, pos, facing * 10))
+            self.bullets.append(Bullet(800, 600, pos, facing * 10, True))
             facing.rotate(360 / self.bulletCount)
 
     def update(self):

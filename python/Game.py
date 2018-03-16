@@ -51,7 +51,7 @@ class Game:
     def update(self):
         """Update the game state"""
         self.enemies = self.wave.getEnemies()
-        if(self.player.getHealth() == 0):
+        if(self.player.getHealth() <= 0):
             self.inGame = False
 
         self.player.update(self.keyboard)

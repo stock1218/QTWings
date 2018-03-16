@@ -19,9 +19,9 @@ class Interaction:
        return (pos1 - pos2).length()
 
     def update(self, enemies, explosions, obstacles, bullets):
-        #check for collisions
+        #check for collisions with player and pickUps
         for i in self.pickUp.getPickUps():
-            if(self.distanceTo(i.getPos(), self.player.getPos()) <= self.player.getRadius() + i.getRadius()):
+            if(self.distanceTo(i.getPos(), self.player.getPos()) <= self.player.getBodyRadius() + i.getRadius()):
                 self.player.givePickUp(self.pickUp.getType(i), self.pickUp.givePickUp(i))
                 print("PICKUP")
 
@@ -32,7 +32,7 @@ class Interaction:
                     x.moveAway(y.getPos())
                     y.moveAway(x.getPos())
 
-            if (self.player.getPos() - x.getPos()).length() <= self.player.getCollisionRadius() + x.getRadius():
+            if (self.player.getPos() - x.getPos()).length() <= self.player.getRadius() + x.getRadius():
                 enemies.remove(x)
                 self.player.damage(x.damageDealt)
                 print("PLAYER DAMAGED")
@@ -54,7 +54,7 @@ class Interaction:
         #Check for collisions with enemies and bullets
         for bullet in bullets:
             for enemy in enemies:
-                if(bullet.isColliding(enemy)):
+                if(bullet.isColliding(enemy) and bullet.isGood):
                     print("HIT")
                     enemy.damage(bullet.getDamage())
                     if bullet.getType() == 'bullet':
@@ -62,7 +62,7 @@ class Interaction:
                     else:
                         pass
                     break
-            if bullet.isColliding(self.player):
+            if bullet.isColliding(self.player) and not bullet.isGood:
                 self.player.damage(bullet.getDamage())
                 print("PLAYER SHOT")
                 if bullet.getType() == 'bullet':

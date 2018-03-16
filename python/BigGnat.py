@@ -14,7 +14,7 @@ class BigGnat(Gnat):
         self.stunned = False
         self.health = health
         self.radius = radius
-        self.weapon = PeaShooter(30)
+        self.weapon = PeaShooter(1)
         self.timer = simplegui.create_timer(1000, self.tick)
         self.sprite = simplegui.load_image("https://i.imgur.com/DfeRGaR.png")
 
@@ -37,7 +37,7 @@ class BigGnat(Gnat):
         self.position += self.velocity
 
     def fire(self, player):
-        return self.weapon.fire(900, 600, self.position, lambda: self.directionVector(player))
+        return self.weapon.fire(900, 600, self.position, lambda: self.directionVector(player), False)
 
     def getType(self):
         return 'BigGnat'

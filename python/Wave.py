@@ -22,10 +22,10 @@ class Wave:
         self.isOn = True
         totalGnats = 5 * self.wave
 
-        for i in range(totalGnats - 1):
+        for i in range(totalGnats):
             self.nonActiveEnemies.append(self.addGnat())
-
-        self.nonActiveEnemies.append(self.addBigGnat())
+        for x in range(totalGnats // 5):
+            self.nonActiveEnemies.append(self.addBigGnat())
 
     def update(self, player):
         if(self.isOn):

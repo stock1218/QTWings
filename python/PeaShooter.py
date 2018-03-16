@@ -12,12 +12,12 @@ class PeaShooter:
         self.fireTimer = simplegui.create_timer(1000 / self.fireRate, self.resetFire)
 
 
-    def fire(self, width, height, position, directionVector):
+    def fire(self, width, height, position, directionVector, isGood):
         if self.canFire:
             self.canFire = False
             self.fireTimer.start()
             return [Bullet(
-                width, height, (position + (directionVector() * 16)), directionVector() * 8)]
+                width, height, (position + (directionVector() * 16)), directionVector() * 8, isGood)]
         return None
 
     def resetFire(self):

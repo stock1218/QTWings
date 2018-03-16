@@ -6,6 +6,7 @@ from Spritesheet import Spritesheet
 import math
 from EMP import EMP
 from ExplosiveBomb import ExplosiveBomb
+from NailBomb import NailBomb
 
 try:
     import simplegui
@@ -21,17 +22,17 @@ class Player:
         self.width = width
         self.height = height
         self.radius = 9
-        self.collisionRadius = self.radius
+        self.bodyRadius = self.radius
         self.health = 3
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
-        self.weapon = PeaShooter(5)
+        self.weapon = Shotgun()
         self.bomb = None
         self.powerUp = None
         self.inCollision = None
         self.stationarySprite = simplegui.load_image('https://i.imgur.com/ZUpcygF.png')
-        self.forwardSpritesheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1, self.radius, 6, False)
+        self.forwardSpritesheet = Spritesheet("https://i.imgur.com/Kd8TC2T.png", 4, 1, self.bodyRadius, 6, False)
 
     def directionVector(self):
         return Vector(0, -1).rotate(self.rotation)
@@ -83,7 +84,7 @@ class Player:
             canvas.draw_image(self.stationarySprite,
                               (self.stationarySprite.get_width() / 2, self.stationarySprite.get_height() / 2),
                               (self.stationarySprite.get_width(), self.stationarySprite.get_height()),
-                              self.position.getP(), (self.radius * 7, self.radius * 7),
+                              self.position.getP(), (self.bodyRadius * 7, self.bodyRadius * 7),
                               self.rotation / (180 / math.pi))
         #canvas.draw_circle(self.position.getP(), self.radius, 1, "#0000ff", "#0000ff")
         #canvas.draw_line(self.position.getP(),
@@ -96,7 +97,7 @@ class Player:
     def givePickUp(self, type, pickUp):
         if(type == 'PowerUp'):
             self.powerUp = pickUp
-            self.collisionRadius = pickUp.getRadius()
+            self.radius = pickUp.getRadius()
 
         elif (type == 'Weapon'):
             self.weapon = pickUp
@@ -107,7 +108,7 @@ class Player:
         print("PICKED UP: " + type)
 
     def fire(self):
-        return self.weapon.fire(self.width, self.height, self.position, self.directionVector)
+        return self.weapon.fire(self.width, self.height, self.position, self.directionVector, True)
 
     def bounce(self, normal):
         self.velocity.reflect(normal)
@@ -129,8 +130,8 @@ class Player:
     def getRadius(self):
         return self.radius
 
-    def getCollisionRadius(self):
-        return self.collisionRadius
+    def getBodyRadius(self):
+        return self.bodyRadius
 
     def getHealth(self):
         return self.health
