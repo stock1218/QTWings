@@ -27,7 +27,7 @@ class Player:
         self.position = initialPos
         self.velocity = Vector(0, 0)
         self.rotation = 0  # Degrees rotation from initial
-        self.weapon = Shotgun()
+        self.weapon = PeaShooter(9)
         self.bomb = None
         self.powerUp = None
         self.inCollision = None
